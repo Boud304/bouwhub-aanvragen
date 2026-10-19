@@ -1,0 +1,1683 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Bouwhub Aanvragen</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: donkere demostrook met rolkeuze, witte vaste kop met logo en tabs, één werkkolom van 1040px op lichtgrijze ondergrond, panelen met dunne lijnen en kleine hoeken */
+:root {
+  color-scheme: light;
+  --bg: #F3F5F7;
+  --surface: #FFFFFF;
+  --surface-2: #F6F8FA;
+  --line: #E1E6EB;
+  --line-strong: #C7D0D9;
+  --ink: #2E3644;
+  --ink-2: #4E5868;
+  --muted: #6B7585;
+  --brand-green: #00AC4F;
+  --green: #00873E;
+  --green-hover: #00702F;
+  --on-green: #FFFFFF;
+  --green-soft: #EAF7EF;
+  --green-line: #BFE6CD;
+  --green-ink: #00733A;
+  --dots: #DCE5EB;
+  --strip: #2E3644;
+  --strip-2: #3C4555;
+  --on-strip: #F2F5F8;
+  --on-strip-2: #AEB8C6;
+  --danger: #B42318;
+  --danger-soft: #FDEEEC;
+  --focus: #00AC4F;
+  --demo-bg: #FFF5D9;
+  --demo-ink: #6E4E00;
+  --demo-line: #EDD38E;
+  --chart: #00A04A;
+  --chart-2: #A7DCBB;
+  --p-aan-bg: #FFF4D6; --p-aan-fg: #6E4E00;
+  --p-bev-bg: #E6F6EC; --p-bev-fg: #00703A;
+  --p-plan-bg: #E9EEF6; --p-plan-fg: #27416B;
+  --p-weg-bg: #DDE7F6; --p-weg-fg: #173A6B;
+  --p-opslag-bg: #E2F1F3; --p-opslag-fg: #1D5660;
+  --p-klaar-bg: #EEF1F4; --p-klaar-fg: #4B5563;
+  --p-stop-bg: #FCEBE9; --p-stop-fg: #9B2C24;
+  --shadow: 0 8px 28px rgba(46, 54, 68, .14);
+  --font: 'Barlow', 'Segoe UI', system-ui, -apple-system, Roboto, sans-serif;
+  --r: 6px;
+  --r-sm: 4px;
+}
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 16px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--surface); }
+h1, h2, h3 { font-family: var(--font); font-weight: 600; line-height: 1.15; margin: 0; text-wrap: balance; color: var(--ink); letter-spacing: -.005em; }
+h1 { font-size: clamp(1.7rem, 1.4rem + 1.2vw, 2.1rem); }
+h2 { font-size: 1.25rem; }
+h3 { font-size: 1.05rem; }
+p { margin: 0; }
+a { color: var(--green-ink); }
+button, input, select, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.num, td, .rij-id, .stat-waarde { font-variant-numeric: tabular-nums; }
+.gutter { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.breed { max-width: 1040px; margin: 0 auto; }
+
+/* Demostrook */
+.demo-strook { background: var(--strip); color: var(--on-strip); font-size: .86rem; }
+.demo-in { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding-block: 8px; }
+.demo-tekst { color: var(--on-strip-2); margin-right: auto; min-width: 0; }
+.demo-strook .demo-tag { background: transparent; color: var(--on-strip); border-color: var(--on-strip-2); }
+.kop-keuzes { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.kop-keuze { display: flex; align-items: center; gap: 6px; }
+.kop-keuze label { font-size: .72rem; text-transform: uppercase; letter-spacing: .12em; color: var(--on-strip-2); white-space: nowrap; }
+.kop-keuze select { background-color: var(--strip-2); color: var(--on-strip); border: 1px solid var(--strip-2); border-radius: var(--r-sm); padding: 5px 30px 5px 10px; min-height: 36px; appearance: none; max-width: 100%;
+  background-image: linear-gradient(45deg, transparent 50%, var(--on-strip-2) 50%), linear-gradient(135deg, var(--on-strip-2) 50%, transparent 50%);
+  background-position: calc(100% - 15px) 52%, calc(100% - 10px) 52%; background-size: 5px 5px; background-repeat: no-repeat; }
+.knop-kop { background: transparent; border: 1px solid var(--on-strip-2); color: var(--on-strip); border-radius: var(--r-sm); padding: 5px 12px; min-height: 36px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
+.knop-kop:hover { background: var(--strip-2); }
+.teller { background: var(--brand-green); color: var(--on-green); border-radius: 3px; font-size: .74rem; font-weight: 700; padding: 0 6px; }
+
+/* Kop met logo */
+.kop { background: var(--surface); border-bottom: 1px solid var(--line); position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; }
+.kop-in { display: flex; align-items: stretch; gap: 8px 32px; min-height: 68px; flex-wrap: wrap; }
+.logo { background: none; border: 0; cursor: pointer; padding-inline: 0; color: inherit; display: flex; align-items: center; gap: 14px; text-decoration: none; padding-block: 12px; flex: none; }
+.logo img { height: 38px; width: auto; display: block; }
+.logo-app { border-left: 1px solid var(--line); padding-left: 14px; font-size: .78rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); line-height: 1.2; }
+.nav { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; margin-left: auto; align-items: stretch; }
+.nav::-webkit-scrollbar { display: none; }
+.nav button { background: none; border: 0; color: var(--ink-2); padding: 0 14px; cursor: pointer; white-space: nowrap; font-weight: 600; font-size: .98rem; border-bottom: 3px solid transparent; border-top: 3px solid transparent; }
+.nav button:hover { color: var(--ink); background: var(--surface-2); }
+.nav button[aria-current="page"] { color: var(--ink); border-bottom-color: var(--brand-green); }
+
+.demo-tag { display: inline-block; background: var(--demo-bg); color: var(--demo-ink); border: 1px solid var(--demo-line); font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; border-radius: 3px; padding: 0 6px; line-height: 1.6; vertical-align: 2px; white-space: nowrap; }
+
+.reset-balk { background: var(--danger-soft); border-bottom: 1px solid var(--line); }
+.reset-balk .breed { padding-block: 12px; display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; }
+
+main { padding-block: 32px 72px; }
+.pagina { display: grid; gap: 24px; }
+.eyebrow { font-size: .76rem; text-transform: uppercase; letter-spacing: .16em; color: var(--green-ink); font-weight: 600; }
+.sub { color: var(--ink-2); max-width: 65ch; }
+.intro { display: grid; gap: 6px; }
+
+/* Knoppen */
+.knop { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 8px 18px; border-radius: var(--r-sm); border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink); font-weight: 600; cursor: pointer; text-decoration: none; }
+.knop:hover { background: var(--surface-2); border-color: var(--ink-2); }
+.knop.primair { background: var(--green); border-color: var(--green); color: var(--on-green); }
+.knop.primair:hover { background: var(--green-hover); border-color: var(--green-hover); }
+.knop.gevaar { background: var(--danger); border-color: var(--danger); color: var(--on-green); }
+.knop.gevaar-licht { color: var(--danger); }
+.knop.klein { min-height: 36px; padding: 4px 12px; font-size: .92rem; }
+.knop.link { border: 0; background: none; color: var(--green-ink); padding-inline: 0; min-height: 36px; }
+.knop.link:hover { text-decoration: underline; background: none; }
+.terug { justify-self: start; }
+.knoppen { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+
+/* Keuzetegels */
+.tegels { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.tegel { text-align: left; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 20px; cursor: pointer; display: grid; grid-template-columns: 48px minmax(0, 1fr) auto; gap: 4px 16px; align-items: center; }
+.tegel:hover { border-color: var(--brand-green); }
+.tegel-icoon { grid-row: span 2; width: 48px; height: 48px; border-radius: var(--r-sm); background: var(--green-soft); color: var(--green-ink); display: grid; place-items: center; }
+.tegel-titel { font-size: 1.2rem; font-weight: 600; color: var(--ink); }
+.tegel-pijl { grid-row: span 2; grid-column: 3; color: var(--green-ink); font-size: 1.3rem; }
+.tegel-tekst { color: var(--ink-2); grid-column: 2; }
+
+/* Tabs */
+.tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+.tabs button { background: none; border: 0; padding: 10px 2px; margin-right: 18px; font-weight: 600; color: var(--muted); border-bottom: 3px solid transparent; cursor: pointer; margin-bottom: -1px; }
+.tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--brand-green); }
+
+/* Lijst met aanvragen: één paneel met rijen */
+.lijst { list-style: none; margin: 0; padding: 0; display: grid; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
+.lijst > li + li { border-top: 1px solid var(--line); }
+.rij { width: 100%; text-align: left; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 16px; align-items: center; background: var(--surface); border: 0; padding: 14px 18px; cursor: pointer; }
+.rij:hover { background: var(--surface-2); }
+.rij-links { display: grid; gap: 1px; min-width: 0; }
+.rij-boven { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; font-size: .84rem; color: var(--muted); }
+.rij-id { font-weight: 600; color: var(--ink-2); }
+.rij-titel { font-weight: 600; font-size: 1.05rem; color: var(--ink); }
+.rij-meta { color: var(--ink-2); font-size: .93rem; }
+.type { font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .12em; }
+.pill { display: inline-flex; align-items: center; gap: 6px; border-radius: 3px; padding: 2px 9px; font-size: .84rem; font-weight: 600; white-space: nowrap; }
+.pill::before { content: ""; width: 6px; height: 6px; border-radius: 1px; background: currentColor; }
+.p-aan { background: var(--p-aan-bg); color: var(--p-aan-fg); }
+.p-bev { background: var(--p-bev-bg); color: var(--p-bev-fg); }
+.p-plan { background: var(--p-plan-bg); color: var(--p-plan-fg); }
+.p-weg { background: var(--p-weg-bg); color: var(--p-weg-fg); }
+.p-opslag { background: var(--p-opslag-bg); color: var(--p-opslag-fg); }
+.p-klaar { background: var(--p-klaar-bg); color: var(--p-klaar-fg); }
+.p-stop { background: var(--p-stop-bg); color: var(--p-stop-fg); }
+.leeg { padding: 32px 20px; text-align: center; color: var(--muted); border: 1px dashed var(--line-strong); border-radius: var(--r); background: var(--surface); }
+
+/* Panelen */
+.blok { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 20px; display: grid; gap: 14px; min-width: 0; }
+.blok > h2 { font-size: 1.15rem; }
+.blok-kop { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.notitie { color: var(--ink-2); font-size: .92rem; }
+details.blok { padding-block: 14px; }
+details.blok > summary { cursor: pointer; font-weight: 600; font-size: 1.05rem; list-style: none; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+details.blok > summary::-webkit-details-marker { display: none; }
+details.blok > summary::after { content: "Openen"; margin-left: auto; font-size: .86rem; font-weight: 600; color: var(--green-ink); }
+details.blok[open] > summary::after { content: "Sluiten"; }
+
+/* Formulier */
+.formulier { display: grid; gap: 20px; }
+.form-kop { display: grid; gap: 6px; }
+fieldset.sectie { border: 1px solid var(--line); border-radius: var(--r); background: var(--surface); padding: 20px; margin: 0; display: grid; gap: 18px; min-width: 0; }
+fieldset.sectie > legend { float: left; width: 100%; padding: 0 0 12px; margin: 0; border-bottom: 1px solid var(--line); font-size: .78rem; font-weight: 600; text-transform: uppercase; letter-spacing: .16em; color: var(--ink-2); }
+.rij-velden { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px; }
+.veld { display: grid; gap: 6px; min-width: 0; }
+.veld > label, .veld > legend, .veld-label { font-weight: 600; color: var(--ink); padding: 0; }
+.ster { color: var(--danger); margin-left: 2px; }
+.hint { color: var(--muted); font-size: .9rem; }
+input[type="text"], input[type="tel"], input[type="email"], input[type="number"], input[type="date"], select, textarea {
+  width: 100%; min-height: 44px; padding: 8px 12px; border: 1px solid var(--line-strong); border-radius: var(--r-sm); background: var(--surface); color: var(--ink);
+}
+textarea { min-height: 84px; resize: vertical; }
+select { appearance: none; padding-right: 36px;
+  background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+  background-position: calc(100% - 18px) 52%, calc(100% - 13px) 52%; background-size: 5px 5px; background-repeat: no-repeat; }
+input:hover, select:hover, textarea:hover { border-color: var(--muted); }
+input:focus, select:focus, textarea:focus { border-color: var(--brand-green); outline: 2px solid var(--green-line); outline-offset: 0; }
+.heeft-fout input, .heeft-fout select, .heeft-fout textarea, input[aria-invalid="true"], select[aria-invalid="true"] { border-color: var(--danger); box-shadow: inset 0 0 0 1px var(--danger); }
+.fout { color: var(--danger); font-size: .9rem; font-weight: 600; }
+fieldset.veld { border: 0; margin: 0; padding: 0; min-width: 0; }
+.segment { display: inline-flex; flex-wrap: wrap; gap: 8px; }
+.segment label { position: relative; }
+.segment input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+.segment span { display: inline-flex; align-items: center; min-height: 42px; padding: 6px 16px; border: 1px solid var(--line-strong); border-radius: var(--r-sm); background: var(--surface); font-weight: 600; cursor: pointer; }
+.segment label:hover span { border-color: var(--muted); }
+.segment input:checked + span { background: var(--green-soft); border-color: var(--green); color: var(--green-ink); box-shadow: inset 0 0 0 1px var(--green); }
+.segment input:focus-visible + span { outline: 2px solid var(--focus); outline-offset: 2px; }
+.heeft-fout .segment span { border-color: var(--danger); }
+.info-kaart { background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--r-sm); padding: 12px 14px; font-size: .93rem; color: var(--ink-2); display: grid; gap: 2px; }
+.info-kaart strong { color: var(--ink); }
+.regels { display: grid; gap: 10px; }
+.regel { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1.4fr) auto; gap: 10px; align-items: end; padding: 12px; border: 1px solid var(--line); border-radius: var(--r-sm); background: var(--surface-2); }
+.regel .veld label { font-size: .86rem; }
+.regel-toel, .regel-fout { grid-column: 1 / -1; }
+.knop-weg { min-height: 44px; min-width: 44px; border: 1px solid var(--line-strong); background: var(--surface); border-radius: var(--r-sm); cursor: pointer; color: var(--danger); font-weight: 700; }
+.fout-samenvatting { background: var(--danger-soft); color: var(--danger); border: 1px solid var(--danger); border-radius: var(--r-sm); padding: 12px 16px; font-weight: 600; }
+.verzend { position: sticky; bottom: 0; background: var(--surface); margin-inline: -1px; padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px)); border: 1px solid var(--line); border-radius: var(--r) var(--r) 0 0; display: flex; gap: 10px; flex-wrap: wrap; z-index: 5; }
+.bestand { display: grid; gap: 6px; }
+input[type="file"] { padding: 10px; border: 1px dashed var(--line-strong); border-radius: var(--r-sm); background: var(--surface-2); width: 100%; max-width: 100%; }
+
+/* Detail */
+.detail-kop { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px 20px; flex-wrap: wrap; }
+.detail-kop > div { display: grid; gap: 4px; min-width: 0; }
+.detail-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 20px; align-items: start; }
+.detail-grid.gelijk { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.actiebalk { display: grid; gap: 12px; background: var(--green-soft); border: 1px solid var(--green-line); border-radius: var(--r); padding: 16px 18px; }
+.actiebalk.rustig { background: var(--surface-2); border-color: var(--line); }
+form.actiebalk { background: var(--surface); border-color: var(--line-strong); }
+.verloop { list-style: none; margin: 0; padding: 0; display: grid; }
+.stap { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 12px; position: relative; padding-bottom: 18px; }
+.stap:last-child { padding-bottom: 0; }
+.stap::before { content: ""; position: absolute; left: 9px; top: 20px; bottom: 0; width: 2px; background: var(--line); }
+.stap:last-child::before { display: none; }
+.stap.gedaan::before { background: var(--brand-green); }
+.stip { width: 20px; height: 20px; border-radius: 4px; border: 2px solid var(--line-strong); background: var(--surface); display: grid; place-items: center; z-index: 1; }
+.stap.gedaan .stip { background: var(--brand-green); border-color: var(--brand-green); }
+.stap.gedaan .stip::after { content: ""; width: 5px; height: 9px; border: solid var(--on-green); border-width: 0 2px 2px 0; transform: rotate(45deg) translate(-1px, -1px); }
+.stap.huidig .stip { border-color: var(--brand-green); box-shadow: 0 0 0 3px var(--green-soft); }
+.stap.huidig .stip::after { content: ""; width: 8px; height: 8px; border-radius: 2px; background: var(--brand-green); }
+.stap.stop .stip { background: var(--danger); border-color: var(--danger); }
+.stap-naam { font-weight: 600; }
+.stap.later .stap-naam { color: var(--muted); font-weight: 500; }
+.stap-meta { font-size: .86rem; color: var(--ink-2); }
+.notities { list-style: none; margin: 0; padding: 12px 0 0; display: grid; gap: 8px; border-top: 1px solid var(--line); }
+.notities li { font-size: .9rem; color: var(--ink-2); }
+dl.gegevens { margin: 0; display: grid; grid-template-columns: minmax(120px, 34%) minmax(0, 1fr); gap: 8px 16px; }
+dl.gegevens dt { color: var(--muted); font-size: .93rem; }
+dl.gegevens dd { margin: 0; overflow-wrap: anywhere; }
+.groep-kop { grid-column: 1 / -1; font-size: .74rem; font-weight: 600; text-transform: uppercase; letter-spacing: .16em; color: var(--green-ink); border-top: 1px solid var(--line); padding-top: 12px; margin-top: 6px; }
+.groep-kop:first-child { border-top: 0; padding-top: 0; margin-top: 0; }
+
+/* Mail en Teams voorbeelden */
+.mail, .teamsbericht { border: 1px solid var(--line); border-radius: var(--r-sm); background: var(--surface); overflow: hidden; }
+.mail-kop { display: flex; gap: 8px; align-items: center; padding: 8px 14px; background: var(--surface-2); border-bottom: 1px solid var(--line); font-size: .85rem; font-weight: 600; color: var(--ink-2); flex-wrap: wrap; }
+.mail-meta { margin: 0; padding: 12px 14px 0; display: grid; gap: 2px; font-size: .9rem; }
+.mail-meta div { display: grid; grid-template-columns: 90px minmax(0, 1fr); gap: 8px; }
+.mail-meta dt { color: var(--muted); }
+.mail-meta dd { margin: 0; overflow-wrap: anywhere; }
+.mail-tekst { padding: 12px 14px; display: grid; gap: 8px; max-width: 65ch; }
+.mail-voet, .teams-voet { padding: 0 14px 12px; font-size: .8rem; color: var(--muted); }
+.teamsbericht .teams-tekst { padding: 10px 14px; }
+.teamsbericht .teams-tekst strong { display: block; }
+.stapel { display: grid; gap: 12px; }
+
+/* Logboek */
+.log { list-style: none; margin: 0; padding: 0; display: grid; }
+.log li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 12px; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: .9rem; }
+.log li:last-child { border-bottom: 0; }
+.log-sys { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; background: var(--p-plan-bg); color: var(--p-plan-fg); border-radius: 3px; padding: 2px 6px; align-self: start; white-space: nowrap; }
+.log-tekst { color: var(--ink); }
+.log-meta { grid-column: 2; color: var(--muted); font-size: .8rem; }
+
+/* Achter de schermen paneel */
+.achter { position: fixed; z-index: 40; top: 0; right: 0; bottom: 0; width: min(440px, 100%); background: var(--surface); border-left: 1px solid var(--line); box-shadow: var(--shadow); display: flex; flex-direction: column;
+  padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); padding-right: env(safe-area-inset-right, 0px); }
+.achter-kop { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 16px 20px; border-bottom: 1px solid var(--line); }
+.achter-kop > div { display: flex; gap: 10px; align-items: center; }
+.achter-inhoud { overflow-y: auto; padding: 16px 20px 32px; display: grid; gap: 20px; align-content: start; }
+.module { display: grid; gap: 4px; padding: 12px 14px; border: 1px solid var(--line); border-radius: var(--r-sm); }
+.module strong { font-size: 1rem; }
+.module p { font-size: .88rem; color: var(--ink-2); }
+.scherm { position: fixed; inset: 0; background: rgba(46, 54, 68, .4); z-index: 35; }
+
+/* Meldingen onderin */
+.toasts { position: fixed; z-index: 50; left: 50%; transform: translateX(-50%); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); display: grid; gap: 8px; width: min(520px, calc(100% - 32px)); }
+.toast { background: var(--strip); color: var(--on-strip); border-radius: var(--r-sm); border-left: 4px solid var(--brand-green); padding: 12px 16px; box-shadow: var(--shadow); display: grid; gap: 2px; }
+.toast small { color: var(--on-strip-2); }
+
+/* Medewerker */
+.samenvatting { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; }
+.kengetal { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 14px 16px; display: grid; gap: 2px; text-align: left; cursor: pointer; }
+.kengetal:hover { border-color: var(--muted); }
+.kengetal[aria-pressed="true"] { border-color: var(--green); box-shadow: inset 0 0 0 1px var(--green); }
+.kengetal .stat-waarde { font-weight: 600; font-size: 2rem; line-height: 1.05; }
+.kengetal span:last-child { color: var(--ink-2); font-size: .9rem; }
+.filters { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; align-items: end; }
+.filters .veld label { font-size: .78rem; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); }
+.twee-kolom { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 320px); gap: 20px; align-items: start; }
+.dag-groep { display: grid; gap: 10px; }
+.dag-kop { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.dag-kop h2 { font-size: 1.15rem; }
+.dag-kop .teller-tekst { color: var(--muted); font-size: .9rem; }
+.waarschuwing { color: var(--danger); font-weight: 600; font-size: .9rem; }
+
+/* Beheer en kerncijfers */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+.stat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 16px 18px; display: grid; gap: 4px; }
+.stat-label { color: var(--muted); font-size: .76rem; text-transform: uppercase; letter-spacing: .12em; font-weight: 600; }
+.stat-waarde { font-weight: 600; font-size: 2.2rem; line-height: 1.05; }
+.stat-sub { color: var(--muted); font-size: .86rem; }
+.balken { display: grid; gap: 8px; }
+.balk-rij { display: grid; grid-template-columns: minmax(96px, 150px) minmax(0, 1fr) 36px; gap: 12px; align-items: center; font-size: .93rem; }
+.balk-spoor { height: 16px; background: var(--surface-2); border-radius: 2px; }
+.balk-vul { height: 100%; background: var(--chart); border-radius: 0 3px 3px 0; }
+.balk-rij .num { text-align: right; font-weight: 600; }
+.meter { height: 24px; border-radius: var(--r-sm); background: var(--surface-2); border: 1px solid var(--line); display: flex; overflow: hidden; gap: 2px; }
+.meter-bezet { background: var(--chart); }
+.meter-gereserveerd { background: var(--chart-2); }
+.legenda { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: .88rem; color: var(--ink-2); }
+.legenda i { display: inline-block; width: 12px; height: 12px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+.tabel-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--r); background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: .95rem; }
+th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: .74rem; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); font-weight: 600; background: var(--surface-2); }
+tr:last-child td { border-bottom: 0; }
+td.num, th.num { text-align: right; }
+.nowrap, th { white-space: nowrap; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { background: var(--surface-2); border: 1px solid var(--line); border-radius: 3px; padding: 0 8px; font-size: .86rem; color: var(--ink-2); }
+.vink { display: flex; gap: 10px; align-items: center; min-height: 40px; }
+.vink input { width: 18px; height: 18px; accent-color: var(--green); }
+.vinklijst { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 4px 16px; }
+
+.info-lijst { margin: 0; padding-left: 20px; display: grid; gap: 6px; max-width: 70ch; }
+footer { border-top: 1px solid var(--line); background: var(--surface); }
+footer .breed { padding-block: 18px 32px; display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: center; color: var(--muted); font-size: .9rem; }
+footer img { height: 22px; width: auto; display: block; }
+
+@media (max-width: 760px) {
+  .kop-in { gap: 0; min-height: 0; }
+  .logo { padding-block: 10px 6px; }
+  .logo img { height: 30px; }
+  .nav { margin-left: -14px; width: calc(100% + 14px); }
+  .nav button { padding: 10px 11px; font-size: .95rem; }
+  .demo-tekst { flex: 1 1 auto; }
+  .kop-keuzes { width: 100%; }
+  .kop-keuze { flex: 1 1 150px; }
+  .kop-keuze select { width: 100%; }
+  .kop-keuze label { display: none; }
+  .detail-grid, .detail-grid.gelijk, .twee-kolom { grid-template-columns: minmax(0, 1fr); }
+  .rij { grid-template-columns: minmax(0, 1fr); }
+  .rij .pill { justify-self: start; }
+  .regel { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .regel .veld:first-child { grid-column: 1 / -1; }
+  .regel .knop-weg { grid-column: 1 / -1; justify-self: end; min-height: 36px; }
+  dl.gegevens { grid-template-columns: minmax(0, 1fr); gap: 2px 0; }
+  dl.gegevens dd { margin-bottom: 8px; }
+  .balk-rij { grid-template-columns: 96px minmax(0, 1fr) 30px; }
+  .tegel { grid-template-columns: 44px minmax(0, 1fr) auto; padding: 16px; }
+  .tegel-icoon { width: 44px; height: 44px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .toast { animation: in .18s ease-out; }
+  @keyframes in { from { transform: translateY(6px); opacity: 0; } to { transform: none; opacity: 1; } }
+}
+</style>
+
+</head>
+<body>
+<div class="demo-strook gutter"><div class="breed demo-in">
+  <span class="demo-tag">Demo</span>
+  <span class="demo-tekst">Prototype met nepdata. Koppelingen zijn nagebootst.</span>
+  <div class="kop-keuzes">
+    <div class="kop-keuze"><label for="rol">Rol</label>
+      <select id="rol"><option value="klant">Klant</option><option value="medewerker">Bouwhub medewerker</option><option value="beheerder">Beheerder</option></select></div>
+    <div class="kop-keuze" id="als-wrap"><label for="als">Als</label><select id="als"></select></div>
+    <button class="knop-kop" data-act="achter" id="knop-achter" type="button">Achter de schermen <span class="teller" id="log-teller">0</span></button>
+  </div>
+</div></div>
+<header class="kop gutter"><div class="breed kop-in">
+  <button class="logo" type="button" data-act="home" aria-label="Bouwhub Amsterdam, naar het begin">
+    <img src="data:image/webp;base64,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" width="650" height="148" alt="Bouwhub Amsterdam">
+    <span class="logo-app">Transport<br>en opslag</span>
+  </button>
+  <nav class="nav" id="nav" aria-label="Hoofdmenu"></nav>
+</div></header>
+<div class="reset-balk gutter" id="reset-balk" hidden><div class="breed">
+  <strong>Alles terugzetten naar de beginsituatie? Uw eigen invoer verdwijnt.</strong>
+  <div class="knoppen"><button class="knop gevaar klein" type="button" data-act="reset-ja">Ja, terugzetten</button><button class="knop klein" type="button" data-act="reset-nee">Nee</button></div>
+</div></div>
+<main class="gutter"><div class="breed" id="main"></div></main>
+<footer class="gutter"><div class="breed">
+  <span>Bouwhub aanvragen, prototype</span>
+  <button class="knop link" type="button" data-act="nav" data-view="info">Over dit prototype</button>
+  <button class="knop link" type="button" data-act="reset-vraag">Demo terugzetten</button>
+</div></footer>
+<div class="scherm" id="scherm" hidden data-act="achter-sluit"></div>
+<aside class="achter" id="achter" hidden aria-label="Achter de schermen"></aside>
+<div class="toasts" id="toasts" aria-live="polite"></div>
+
+<script>
+'use strict';
+
+/* =====================================================================
+   INSTELLINGEN
+   Keuzelijsten en aannames staan hier bij elkaar, zodat ze makkelijk aan
+   te passen zijn zonder de rest van de code te begrijpen.
+   ===================================================================== */
+const CONFIG = {
+  sleutel: 'bouwhub-aanvragen-prototype-v1',
+  hubNaam: 'Bouwhub Amsterdam',
+  hubAdres: 'Papierweg 8, Amsterdam',
+  mailAfzender: 'Bouwhub Amsterdam <planning@voorbeeld.nl>',
+  // Aanname: vaste tijdvakken van twee uur voor het lossen.
+  tijdvakken: ['07:00 tot 09:00', '09:00 tot 11:00', '11:00 tot 13:00', '13:00 tot 15:00', '15:00 tot 17:00'],
+  soortLading: ['Europallet', 'Blokpallet', 'Glasbok', 'Anders'],
+  // M1 is strekkende meter. "stuks" is toegevoegd naast M1, M2 en M3 uit het huidige formulier.
+  eenheden: [{ v: 'stuks', t: 'stuks' }, { v: 'M1', t: 'M1 (strekkende meter)' }, { v: 'M2', t: 'M2 (m²)' }, { v: 'M3', t: 'M3 (m³)' }],
+  voertuigen: ['Geen voorkeur', 'Autolaadkraan', 'Citytrailer', 'Bakwagen', 'Anders'],
+  // Opslag wordt gerekend in m². Aanname: de hub heeft 300 m² opslagvloer.
+  opslagCapaciteitM2: 300,
+  // Aanname: de klant kan zelf wijzigen en annuleren tot de aanvraag is ingepland.
+  wijzigbaarIn: ['Aangevraagd', 'Bevestigd'],
+  pakbonTypes: '.pdf,.jpg,.jpeg,.png',
+  maxPakbonMB: 10,
+  klantSoorten: ['Projectteam', 'Onderaannemer', 'Leverancier']
+};
+
+const FLOW = {
+  transport: ['Aangevraagd', 'Bevestigd', 'Ingepland', 'Onderweg', 'Geleverd'],
+  opslag: ['Aangevraagd', 'Bevestigd', 'Ingepland', 'In opslag', 'Afgerond']
+};
+const EIND = ['Geleverd', 'Afgerond', 'Afgewezen', 'Geannuleerd'];
+const PILL = { 'Aangevraagd': 'aan', 'Bevestigd': 'bev', 'Ingepland': 'plan', 'Onderweg': 'weg', 'In opslag': 'opslag', 'Geleverd': 'klaar', 'Afgerond': 'klaar', 'Afgewezen': 'stop', 'Geannuleerd': 'stop' };
+const ALLE_STATUSSEN = ['Aangevraagd', 'Bevestigd', 'Ingepland', 'Onderweg', 'In opslag', 'Geleverd', 'Afgerond', 'Afgewezen', 'Geannuleerd'];
+
+/* =====================================================================
+   OPSLAG IN DE BROWSER
+   Alles wat de gebruiker invoert wordt in localStorage van deze browser
+   bewaard. Lukt dat niet (privévenster), dan werkt het prototype gewoon
+   door tot de pagina wordt herladen.
+   ===================================================================== */
+const browserOpslag = {
+  lees(k) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : null; } catch (e) { return null; } },
+  schrijf(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* geen opslag beschikbaar */ } },
+  wis(k) { try { localStorage.removeItem(k); } catch (e) { /* niets */ } }
+};
+
+/* ---------- Datumhulpjes ---------- */
+const pad = n => String(n).padStart(2, '0');
+function dag(offset = 0) { const d = new Date(); d.setHours(12, 0, 0, 0); d.setDate(d.getDate() + offset); return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`; }
+function moment(offsetDagen, uur, min = 0) { const d = new Date(); d.setDate(d.getDate() + offsetDagen); d.setHours(uur, min, 0, 0); return d.toISOString(); }
+const nu = () => new Date().toISOString();
+const DAGEN = ['zo', 'ma', 'di', 'wo', 'do', 'vr', 'za'];
+const MAANDEN = ['jan', 'feb', 'mrt', 'apr', 'mei', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec'];
+function plusDagen(iso, n) { const [y, m, d] = iso.split('-').map(Number); const dt = new Date(y, m - 1, d, 12); dt.setDate(dt.getDate() + n); return `${dt.getFullYear()}-${pad(dt.getMonth() + 1)}-${pad(dt.getDate())}`; }
+function fmtDag(iso) {
+  if (!iso) return 'niet ingevuld';
+  const [y, m, d] = iso.split('-').map(Number); const dt = new Date(y, m - 1, d, 12);
+  return `${DAGEN[dt.getDay()]} ${d} ${MAANDEN[m - 1]}`;
+}
+function dagTekst(iso) {
+  if (!iso) return 'niet ingevuld';
+  if (iso === dag(0)) return `Vandaag, ${fmtDag(iso)}`;
+  if (iso === dag(1)) return `Morgen, ${fmtDag(iso)}`;
+  if (iso === dag(-1)) return `Gisteren, ${fmtDag(iso)}`;
+  return fmtDag(iso);
+}
+const dagKlein = iso => { const t = dagTekst(iso); return t.charAt(0).toLowerCase() + t.slice(1); };
+function fmtMoment(iso) { const d = new Date(iso); return `${d.getDate()} ${MAANDEN[d.getMonth()]} om ${pad(d.getHours())}:${pad(d.getMinutes())}`; }
+
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const kopie = o => JSON.parse(JSON.stringify(o));
+
+/* =====================================================================
+   NEPDATA (beginsituatie)
+   Alle namen, adressen, nummers en mailadressen zijn verzonnen.
+   Datums worden berekend vanaf vandaag, zodat de demo altijd actueel oogt.
+   ===================================================================== */
+function beginsituatie() {
+  const projecten = [
+    { id: 'P1', nummer: 'PRJ-24118', naam: 'Wilgenhof', adres: 'Wilgenhof 2 t/m 86, Amsterdam Noord', toegang: 'Inrit via de achterzijde. Voertuigen tot 10 meter. Lossen op het binnenterrein tussen 07:30 en 15:00.', contactNaam: 'Jeroen Hoek', contactTel: '06 0000 0101', klanten: ['K1', 'K3'] },
+    { id: 'P2', nummer: 'PRJ-24131', naam: 'Kastanjehof blok B', adres: 'Kastanjehof 1 t/m 64, Amsterdam Oost', toegang: 'Smalle straat met eenrichtingsverkeer. Geen opleggers. Lossen alleen voor de portiek aan de pleinzijde.', contactNaam: 'Sanne Mulder', contactTel: '06 0000 0102', klanten: ['K1', 'K2'] },
+    { id: 'P3', nummer: 'PRJ-25007', naam: 'Plasweg portiekflats', adres: 'Plasweg 10 t/m 48, Amsterdam Nieuw-West', toegang: 'Parkeervakken voor de deur zijn afgezet. Hoogtebeperking van 3,8 meter op de aanrijroute.', contactNaam: 'Youssef Amrani', contactTel: '06 0000 0103', klanten: ['K2'] },
+    { id: 'P4', nummer: 'PRJ-25019', naam: 'Dijkgraafhuizen', adres: 'Dijkgraafpad 3 t/m 41, Amsterdam Noord', toegang: 'Bouwplaats aan de dijk. De berm draagt geen zware voertuigen. Een autolaadkraan staat altijd op de rijbaan.', contactNaam: 'Ilse de Groot', contactTel: '06 0000 0104', klanten: ['K2'] },
+    { id: 'P5', nummer: 'PRJ-25024', naam: 'Amstelkade complex 3', adres: 'Amstelkade 120 t/m 150, Amsterdam Zuid', toegang: 'Milieuzone. Lossen op de kade tussen 09:00 en 15:00. Bij hijsen is een verkeersregelaar nodig.', contactNaam: 'Tom Willems', contactTel: '06 0000 0105', klanten: ['K1'] }
+  ];
+  const klanten = [
+    { id: 'K1', naam: 'Gevelwerken Noordkant', soort: 'Onderaannemer' },
+    { id: 'K2', naam: 'Installatie Ringdijk', soort: 'Onderaannemer' },
+    { id: 'K3', naam: 'Projectteam Wilgenhof', soort: 'Projectteam' }
+  ];
+  const gebruikers = [
+    { id: 'U1', naam: 'Lotte Jansen', mail: 'lotte.jansen@voorbeeld.nl', tel: '06 0000 0201', rol: 'klant', klantId: 'K1', actief: true },
+    { id: 'U2', naam: 'Mehmet Kaya', mail: 'mehmet.kaya@voorbeeld.nl', tel: '06 0000 0202', rol: 'klant', klantId: 'K2', actief: true },
+    { id: 'U3', naam: 'Daan Visser', mail: 'daan.visser@voorbeeld.nl', tel: '06 0000 0203', rol: 'klant', klantId: 'K3', actief: true },
+    { id: 'U4', naam: 'Planning Bouwhub', mail: 'planning@voorbeeld.nl', tel: '06 0000 0301', rol: 'medewerker', klantId: '', actief: true },
+    { id: 'U5', naam: 'Beheerder Bouwhub', mail: 'beheer@voorbeeld.nl', tel: '06 0000 0302', rol: 'beheerder', klantId: '', actief: true }
+  ];
+  const M = 'Planning Bouwhub';
+  const st = (status, tijd, door, notitie) => ({ soort: 'status', status, tijd, door, notitie: notitie || '' });
+  const nt = (tijd, door, notitie) => ({ soort: 'notitie', tijd, door, notitie });
+  const t = o => Object.assign({
+    type: 'transport', regels: [], laadmeter: '', gewicht: '', omschrijving: '', laadKeuze: 'ander', laadadres: '', laaddatum: '',
+    losKeuze: 'bouwplaats', losadres: '', losdatum: '', tijdvak: '', contactNaam: '', contactTel: '', toegang: '', voertuig: 'Geen voorkeur',
+    voertuigAnders: '', kooiaap: '', hijsen: '', kraan: '', pakbon: null, gepland: null, gekoppeld: null
+  }, o);
+  const o = x => Object.assign({
+    type: 'opslag', regels: [], omschrijving: '', m2: '', gewicht: '', inslagdatum: '', duurWeken: '', afroep: '', gevaarlijk: 'Nee',
+    gevaarlijkToelichting: '', opmerkingen: '', pakbon: null, gepland: null, gekoppeld: null
+  }, x);
+  const P = id => projecten.find(p => p.id === id);
+  const aanvragen = [
+    t({ id: 'BH-1012', klantId: 'K3', aanvragerId: 'U3', projectId: 'P1', status: 'Geannuleerd', aangemaakt: moment(-3, 9, 5),
+      regels: [{ soort: 'Europallet', aantal: 3, eenheid: 'stuks', toelichting: '' }], omschrijving: 'Badkamertegels', laadadres: 'Tegelgroothandel, Voorbeeldweg 4, Diemen',
+      laaddatum: dag(2), losdatum: dag(2), tijdvak: '09:00 tot 11:00', contactNaam: 'Jeroen Hoek', contactTel: '06 0000 0101', toegang: P('P1').toegang, kooiaap: 'Nee', hijsen: 'Nee',
+      history: [st('Aangevraagd', moment(-3, 9, 5), 'Daan Visser'), st('Geannuleerd', moment(-2, 14, 20), 'Daan Visser', 'Levering verschoven door de leverancier.')] }),
+    o({ id: 'BH-1011', klantId: 'K1', aanvragerId: 'U1', projectId: 'P5', status: 'Aangevraagd', aangemaakt: moment(-1, 16, 20),
+      omschrijving: 'Natuurstenen dorpels voor de entrees', regels: [{ soort: 'Blokpallet', aantal: 5, eenheid: 'stuks', toelichting: '' }], m2: 6, gewicht: '3,5',
+      inslagdatum: dag(6), duurWeken: 8, afroep: 'In delen', gevaarlijk: 'Nee',
+      history: [st('Aangevraagd', moment(-1, 16, 20), 'Lotte Jansen')] }),
+    t({ id: 'BH-1010', klantId: 'K2', aanvragerId: 'U2', projectId: 'P3', status: 'Aangevraagd', aangemaakt: moment(0, 7, 55),
+      regels: [{ soort: 'Europallet', aantal: 2, eenheid: 'stuks', toelichting: '' }], omschrijving: 'Mechanische ventilatie units', laadKeuze: 'hub',
+      laaddatum: dag(5), losdatum: dag(5), tijdvak: '07:00 tot 09:00', contactNaam: 'Youssef Amrani', contactTel: '06 0000 0103', toegang: P('P3').toegang, kooiaap: 'Nee', hijsen: 'Nee',
+      history: [st('Aangevraagd', moment(0, 7, 55), 'Mehmet Kaya')] }),
+    t({ id: 'BH-1009', klantId: 'K1', aanvragerId: 'U1', projectId: 'P2', status: 'Aangevraagd', aangemaakt: moment(0, 8, 40),
+      regels: [{ soort: 'Anders', aantal: 12, eenheid: 'M1', toelichting: 'Bundels steigerbuizen' }], gewicht: '1,8', omschrijving: 'Steigermateriaal voor de achtergevel',
+      laadadres: 'Steigerverhuur, Voorbeeldweg 30, Purmerend', laaddatum: dag(3), losdatum: dag(3), tijdvak: '13:00 tot 15:00', contactNaam: 'Sanne Mulder', contactTel: '06 0000 0102',
+      toegang: P('P2').toegang, voertuig: 'Autolaadkraan', kooiaap: 'Ja', hijsen: 'Ja', kraan: 'Nee', pakbon: { naam: 'pakbon-steigermateriaal.pdf', grootte: 184320, pad: 'Projecten/PRJ-24131/Aanvragen/BH-1009/pakbon-steigermateriaal.pdf' },
+      history: [st('Aangevraagd', moment(0, 8, 40), 'Lotte Jansen')] }),
+    o({ id: 'BH-1008', klantId: 'K3', aanvragerId: 'U3', projectId: 'P1', status: 'Bevestigd', aangemaakt: moment(-2, 10, 10),
+      omschrijving: 'Tegels en lijm voor de badkamers', regels: [{ soort: 'Europallet', aantal: 8, eenheid: 'stuks', toelichting: '' }], m2: 10,
+      inslagdatum: dag(4), duurWeken: 3, afroep: 'In delen', gevaarlijk: 'Nee',
+      history: [st('Aangevraagd', moment(-2, 10, 10), 'Daan Visser'), st('Bevestigd', moment(-2, 13, 45), M)] }),
+    t({ id: 'BH-1007', klantId: 'K2', aanvragerId: 'U2', projectId: 'P2', status: 'Bevestigd', aangemaakt: moment(-2, 15, 30),
+      regels: [{ soort: 'Blokpallet', aantal: 3, eenheid: 'stuks', toelichting: '' }], omschrijving: 'Leidingwerk en radiatoren portiek 1 tot 4',
+      laadadres: 'Groothandel installatie, Voorbeeldkade 8, Amsterdam', laaddatum: dag(3), losdatum: dag(3), tijdvak: '11:00 tot 13:00',
+      contactNaam: 'Sanne Mulder', contactTel: '06 0000 0102', toegang: P('P2').toegang, kooiaap: 'Nee', hijsen: 'Nee',
+      history: [st('Aangevraagd', moment(-2, 15, 30), 'Mehmet Kaya'), st('Bevestigd', moment(-1, 8, 15), M)] }),
+    t({ id: 'BH-1006', klantId: 'K1', aanvragerId: 'U1', projectId: 'P2', status: 'Onderweg', aangemaakt: moment(-3, 11, 0),
+      regels: [{ soort: 'Glasbok', aantal: 1, eenheid: 'stuks', toelichting: '' }], gewicht: '1,2', omschrijving: 'Afroep uit opslag BH-1003: glas voor portiek 12 tot 18', laadKeuze: 'hub',
+      laaddatum: dag(0), losdatum: dag(0), tijdvak: '09:00 tot 11:00', contactNaam: 'Sanne Mulder', contactTel: '06 0000 0102', toegang: P('P2').toegang,
+      voertuig: 'Autolaadkraan', kooiaap: 'Nee', hijsen: 'Ja', kraan: 'Nee', gekoppeld: 'BH-1003', gepland: { datum: dag(0), tijdvak: '09:00 tot 11:00', voertuig: 'Autolaadkraan' },
+      history: [st('Aangevraagd', moment(-3, 11, 0), 'Lotte Jansen'), st('Bevestigd', moment(-3, 13, 20), M), st('Ingepland', moment(-2, 9, 0), M), st('Onderweg', moment(0, 8, 35), M)] }),
+    t({ id: 'BH-1005', klantId: 'K3', aanvragerId: 'U3', projectId: 'P1', status: 'Ingepland', aangemaakt: moment(-4, 14, 0),
+      regels: [{ soort: 'Europallet', aantal: 4, eenheid: 'stuks', toelichting: '' }], gewicht: '2,4', omschrijving: 'Sanitair voor woningen 2 tot 24',
+      laadadres: 'Sanitairgroothandel, Voorbeeldlaan 4, Amsterdam', laaddatum: dag(1), losdatum: dag(1), tijdvak: '07:00 tot 09:00', contactNaam: 'Jeroen Hoek', contactTel: '06 0000 0101',
+      toegang: P('P1').toegang, voertuig: 'Autolaadkraan', kooiaap: 'Nee', hijsen: 'Ja', kraan: 'Nee', gepland: { datum: dag(1), tijdvak: '07:00 tot 09:00', voertuig: 'Autolaadkraan' },
+      history: [st('Aangevraagd', moment(-4, 14, 0), 'Daan Visser'), st('Bevestigd', moment(-4, 16, 30), M), st('Ingepland', moment(-3, 10, 15), M)] }),
+    o({ id: 'BH-1004', klantId: 'K2', aanvragerId: 'U2', projectId: 'P4', status: 'In opslag', aangemaakt: moment(-8, 9, 30),
+      omschrijving: 'Radiatoren en leidingwerk', regels: [{ soort: 'Europallet', aantal: 10, eenheid: 'stuks', toelichting: '' }], m2: 12,
+      inslagdatum: dag(-5), duurWeken: 4, afroep: 'In één keer', gevaarlijk: 'Nee', gepland: { datum: dag(-5), tijdvak: '07:00 tot 09:00' },
+      history: [st('Aangevraagd', moment(-8, 9, 30), 'Mehmet Kaya'), st('Bevestigd', moment(-8, 11, 5), M), st('Ingepland', moment(-7, 9, 0), M), st('In opslag', moment(-5, 8, 10), M)] }),
+    o({ id: 'BH-1003', klantId: 'K1', aanvragerId: 'U1', projectId: 'P2', status: 'In opslag', aangemaakt: moment(-15, 10, 0),
+      omschrijving: 'Kozijnen en glas voor blok B, fase 2', regels: [{ soort: 'Glasbok', aantal: 3, eenheid: 'stuks', toelichting: '' }, { soort: 'Europallet', aantal: 8, eenheid: 'stuks', toelichting: '' }],
+      m2: 20, gewicht: '6', inslagdatum: dag(-12), duurWeken: 6, afroep: 'In delen', gevaarlijk: 'Nee', gepland: { datum: dag(-12), tijdvak: '07:00 tot 09:00' },
+      history: [st('Aangevraagd', moment(-15, 10, 0), 'Lotte Jansen'), st('Bevestigd', moment(-15, 12, 40), M), st('Ingepland', moment(-14, 9, 0), M), st('In opslag', moment(-12, 8, 0), M), nt(moment(-3, 11, 0), 'Lotte Jansen', 'Afroep BH-1006 aangevraagd.')] }),
+    t({ id: 'BH-1002', klantId: 'K2', aanvragerId: 'U2', projectId: 'P3', status: 'Geleverd', aangemaakt: moment(-9, 13, 0),
+      regels: [{ soort: 'Blokpallet', aantal: 2, eenheid: 'stuks', toelichting: '' }, { soort: 'Anders', aantal: 1, eenheid: 'stuks', toelichting: 'Rol kabelgoot' }], omschrijving: 'Elektra voor de trappenhuizen',
+      laadKeuze: 'hub', laaddatum: dag(-6), losdatum: dag(-6), tijdvak: '09:00 tot 11:00', contactNaam: 'Youssef Amrani', contactTel: '06 0000 0103', toegang: P('P3').toegang,
+      kooiaap: 'Ja', hijsen: 'Nee', gepland: { datum: dag(-6), tijdvak: '09:00 tot 11:00', voertuig: 'Bakwagen' },
+      history: [st('Aangevraagd', moment(-9, 13, 0), 'Mehmet Kaya'), st('Bevestigd', moment(-9, 15, 10), M), st('Ingepland', moment(-8, 9, 30), M), st('Onderweg', moment(-6, 8, 40), M), st('Geleverd', moment(-6, 9, 35), M)] }),
+    t({ id: 'BH-1001', klantId: 'K1', aanvragerId: 'U1', projectId: 'P1', status: 'Geleverd', aangemaakt: moment(-13, 9, 12),
+      regels: [{ soort: 'Europallet', aantal: 6, eenheid: 'stuks', toelichting: '' }], gewicht: '1,5', omschrijving: 'Isolatieplaten voor de gevel',
+      laadadres: 'Isolatieleverancier, Voorbeeldweg 12, Zaandam', laaddatum: dag(-10), losKeuze: 'hub', losdatum: dag(-10), tijdvak: '07:00 tot 09:00',
+      contactNaam: 'Jeroen Hoek', contactTel: '06 0000 0101', gepland: { datum: dag(-10), tijdvak: '07:00 tot 09:00', voertuig: 'Citytrailer' },
+      history: [st('Aangevraagd', moment(-13, 9, 12), 'Lotte Jansen'), st('Bevestigd', moment(-13, 11, 40), M), st('Ingepland', moment(-12, 8, 30), M), st('Onderweg', moment(-10, 7, 5), M), st('Geleverd', moment(-10, 8, 20), M)] })
+  ];
+  return {
+    versie: 2, volgendNr: 1013, projecten, klanten, gebruikers, aanvragen, berichten: [], teams: [],
+    log: [{ id: 'L0', tijd: nu(), systeem: 'Prototype', richting: '', tekst: 'Demo gestart met nepdata. Er is geen verbinding met echte systemen.', aanvraagId: '' }]
+  };
+}
+
+let S = (function () { const d = browserOpslag.lees(CONFIG.sleutel + ':data'); return d && d.versie === 2 ? d : beginsituatie(); })();
+function bewaar() { browserOpslag.schrijf(CONFIG.sleutel + ':data', S); }
+
+const UI = Object.assign({ rol: 'klant', als: 'U1' }, browserOpslag.lees(CONFIG.sleutel + ':ui') || {}, { view: '', p: {}, vorige: null, f: { status: 'open', type: 'alle', project: 'alle', zoek: '' }, achterOpen: false, logGezien: 0 });
+function bewaarUI() { browserOpslag.schrijf(CONFIG.sleutel + ':ui', { rol: UI.rol, als: UI.als }); }
+
+/* ---------- Opzoeken ---------- */
+const proj = id => S.projecten.find(p => p.id === id);
+const klant = id => S.klanten.find(k => k.id === id);
+const gebr = id => S.gebruikers.find(g => g.id === id);
+const aanv = id => S.aanvragen.find(a => a.id === id);
+const klantGebruikers = () => S.gebruikers.filter(g => g.rol === 'klant' && g.actief !== false);
+function huidigeGebruiker() {
+  if (UI.rol === 'klant') { const g = gebr(UI.als); return g && g.rol === 'klant' && g.actief !== false ? g : klantGebruikers()[0]; }
+  return S.gebruikers.find(g => g.rol === UI.rol && g.actief !== false) || { naam: UI.rol === 'medewerker' ? 'Bouwhub medewerker' : 'Beheerder', mail: '' };
+}
+const projectenVanKlant = kid => S.projecten.filter(p => (p.klanten || []).includes(kid));
+const hoofdDatum = a => (a.gepland && a.gepland.datum) || (a.type === 'transport' ? a.losdatum : a.inslagdatum);
+const hoofdTijdvak = a => (a.gepland && a.gepland.tijdvak) || (a.type === 'transport' ? a.tijdvak : '');
+const typeNaam = a => a.type === 'transport' ? 'Transport' : 'Opslag';
+const EENHEID = { stuks: 'x', M1: 'strekkende meter', M2: 'm²', M3: 'm³' };
+const m2Tekst = n => `${String(n).replace('.', ',')} m²`;
+function regelTekst(r) {
+  const wat = r.soort === 'Anders' ? (r.toelichting || 'Anders') : r.soort;
+  const aantal = String(r.aantal).replace('.', ',');
+  return r.eenheid === 'stuks' || !r.eenheid ? `${aantal} x ${wat}` : `${wat}, ${aantal} ${EENHEID[r.eenheid] || r.eenheid}`;
+}
+const regelsTekst = regels => (regels || []).map(regelTekst).join('; ');
+function adresTekst(a, welk) {
+  const p = proj(a.projectId);
+  if (welk === 'laad') return a.laadKeuze === 'hub' ? `${CONFIG.hubNaam}, ${CONFIG.hubAdres}` : (a.laadadres || 'niet ingevuld');
+  if (a.losKeuze === 'hub') return `${CONFIG.hubNaam}, ${CONFIG.hubAdres}`;
+  if (a.losKeuze === 'ander') return a.losadres || 'niet ingevuld';
+  return p ? `Bouwplaats ${p.naam}, ${p.adres}` : 'Bouwplaats';
+}
+const voornaam = n => String(n || '').split(' ')[0];
+
+/* =====================================================================
+   KOPPELINGEN (DEMO)
+   Alles hieronder doet alleen alsof. Er gaat niets naar buiten.
+   Elk onderdeel heeft een eigen blok. Een bouwer vervangt later de inhoud
+   van de functies door een echte koppeling en laat de rest van de app
+   ongemoeid. Bij elk blok staat welk gegeven in welke richting gaat.
+   ===================================================================== */
+const Koppelingen = {
+  log(systeem, richting, tekst, aanvraagId) {
+    S.log.unshift({ id: 'L' + Date.now() + Math.random().toString(36).slice(2, 6), tijd: nu(), systeem, richting, tekst, aanvraagId: aanvraagId || '' });
+    if (S.log.length > 300) S.log.length = 300;
+  },
+
+  // 4PS en Business Central
+  // Richting app naar Business Central: nieuwe aanvraag, wijziging en annulering, met ladingregels, onder het projectnummer.
+  // Richting Business Central naar app: projecten van de klant en de status van elke aanvraag.
+  // Later: eigen API pagina op een aanvraagtabel, aangeroepen via Power Automate. Business Central is de bron van de status.
+  vierPS: {
+    naam: '4PS en Business Central',
+    richting: 'App naar Business Central: aanvraag met ladingregels onder het projectnummer. Business Central naar app: projecten en status. Later via een eigen API pagina.',
+    aanvraagVersturen(a) { const p = proj(a.projectId); Koppelingen.log('4PS / Business Central', 'App naar BC', `Aanvraag ${a.id} als concept naar 4PS verstuurd onder project ${p ? p.nummer : ''}.`, a.id); },
+    aanvraagBijwerken(a) { Koppelingen.log('4PS / Business Central', 'App naar BC', `Wijziging van ${a.id} naar 4PS verstuurd.`, a.id); },
+    statusVastgelegd(a, status) { Koppelingen.log('4PS / Business Central', 'BC naar app', `Status van ${a.id} in Business Central vastgelegd als ${status}.`, a.id); },
+    projectGegevens(p) { Koppelingen.log('4PS / Business Central', 'BC naar app', `Projectgegevens van ${p.nummer} zouden uit 4PS komen. Hier alleen lokaal aangepast.`, ''); }
+  },
+
+  // SharePoint (projectmap). OneDrive is persoonlijk en wordt daarom niet gebruikt voor pakbonnen.
+  // Richting app naar SharePoint: pakbon in de map Projecten/<projectnummer>/Aanvragen/<aanvraagnummer>.
+  // De link naar die map gaat mee naar de aanvraag in Business Central.
+  sharepoint: {
+    naam: 'SharePoint',
+    richting: 'App naar SharePoint: pakbon in de projectmap van de aanvraag. De link naar de map gaat mee naar Business Central.',
+    pakbonOpslaan(a, bestand) {
+      const p = proj(a.projectId);
+      const pad = `Projecten/${p ? p.nummer : 'onbekend'}/Aanvragen/${a.id}/${bestand.naam}`;
+      Koppelingen.log('SharePoint', 'App naar SharePoint', `Pakbon opgeslagen in ${pad}.`, a.id);
+      return pad;
+    }
+  },
+
+  // Outlook
+  // Richting Power Automate naar de mailbox van de klant: bevestiging, wijziging en statusberichten.
+  outlook: {
+    naam: 'Outlook',
+    richting: 'Power Automate naar de mailbox van de klant: bevestiging, wijziging en statusberichten.',
+    _mail(a, onderwerp, regels) {
+      const g = gebr(a.aanvragerId) || {};
+      const m = { id: 'M' + Date.now() + Math.random().toString(36).slice(2, 6), aanvraagId: a.id, tijd: nu(), van: CONFIG.mailAfzender, aan: `${g.naam || ''} <${g.mail || ''}>`, onderwerp, tekst: [`Beste ${voornaam(g.naam)},`, ...regels, 'Met vriendelijke groet,', CONFIG.hubNaam] };
+      S.berichten.unshift(m);
+      Koppelingen.log('Outlook', 'Naar klant', `Mail "${onderwerp}" klaargezet voor ${g.mail || 'de klant'}.`, a.id);
+      return m;
+    },
+    bevestiging(a) {
+      const p = proj(a.projectId);
+      const kern = a.type === 'transport'
+        ? `Lossen: ${fmtDag(a.losdatum)}, ${a.tijdvak}. Adres: ${adresTekst(a, 'los')}.`
+        : `Inslag: ${fmtDag(a.inslagdatum)}. Opslag voor ongeveer ${a.duurWeken} weken, ${m2Tekst(a.m2)} vloeroppervlak.`;
+      return this._mail(a, `Ontvangen: ${typeNaam(a).toLowerCase()}aanvraag ${a.id}`, [
+        `We hebben uw ${typeNaam(a).toLowerCase()}aanvraag ${a.id} ontvangen voor project ${p.naam} (${p.nummer}).`,
+        kern, `Lading: ${regelsTekst(a.regels)}.`,
+        'We bevestigen de aanvraag zo snel mogelijk. U volgt de status in de aanvraagapplicatie.'
+      ]);
+    },
+    wijziging(a) { return this._mail(a, `Gewijzigd: aanvraag ${a.id}`, [`Uw wijziging van aanvraag ${a.id} is ontvangen.`, 'De Bouwhub bevestigt de aanvraag opnieuw.']); },
+    status(a, status, notitie) {
+      const r = [`Uw aanvraag ${a.id} heeft nu de status ${status}.`];
+      if (status === 'Ingepland' && a.gepland) r.push(`Gepland op ${fmtDag(a.gepland.datum)}${a.gepland.tijdvak ? ', ' + a.gepland.tijdvak : ''}.`);
+      if (notitie) r.push(`Toelichting: ${notitie}`);
+      return this._mail(a, `${status}: aanvraag ${a.id}`, r);
+    }
+  },
+
+  // Teams
+  // Richting Power Automate naar het Teams kanaal van het Bouwhub team: melding bij nieuwe, gewijzigde en geannuleerde aanvragen.
+  teams: {
+    naam: 'Teams',
+    richting: 'Power Automate naar het Teams kanaal van het Bouwhub team: melding bij nieuwe, gewijzigde en geannuleerde aanvragen.',
+    melding(a, titel, tekst) {
+      S.teams.unshift({ id: 'T' + Date.now() + Math.random().toString(36).slice(2, 6), aanvraagId: a.id, tijd: nu(), titel, tekst });
+      Koppelingen.log('Teams', 'Naar Bouwhub team', `Melding in kanaal Bouwhub planning: ${titel}.`, a.id);
+    }
+  },
+
+  // Power Automate
+  // Verbindt alles. Start bij een nieuwe aanvraag of wijziging vanuit de app, en bij een statuswijziging via een webhook vanuit Business Central.
+  powerAutomate: {
+    naam: 'Power Automate',
+    richting: 'Start bij een nieuwe aanvraag of wijziging vanuit de app, en bij een statuswijziging via een webhook vanuit Business Central.',
+    start(flow, a) { Koppelingen.log('Power Automate', 'Flow gestart', `Flow "${flow}" gestart voor ${a.id}.`, a.id); }
+  }
+};
+
+/* =====================================================================
+   PROCESSEN (wat er gebeurt bij een actie)
+   ===================================================================== */
+function nieuweAanvraag(data, bestand) {
+  const g = huidigeGebruiker();
+  const a = Object.assign(data, { id: 'BH-' + S.volgendNr++, klantId: g.klantId, aanvragerId: g.id, status: 'Aangevraagd', aangemaakt: nu(), gepland: null, pakbon: null,
+    history: [{ soort: 'status', status: 'Aangevraagd', tijd: nu(), door: g.naam, notitie: '' }] });
+  S.aanvragen.unshift(a);
+  Koppelingen.powerAutomate.start('Nieuwe aanvraag', a);
+  Koppelingen.vierPS.aanvraagVersturen(a);
+  if (bestand) { a.pakbon = { naam: bestand.name, grootte: bestand.size }; a.pakbon.pad = Koppelingen.sharepoint.pakbonOpslaan(a, a.pakbon); }
+  Koppelingen.outlook.bevestiging(a);
+  const p = proj(a.projectId);
+  Koppelingen.teams.melding(a, `Nieuwe ${typeNaam(a).toLowerCase()}aanvraag ${a.id}`, `${p.naam}, ${a.type === 'transport' ? 'lossen ' + fmtDag(a.losdatum) + ', ' + a.tijdvak : 'inslag ' + fmtDag(a.inslagdatum)}. Aangevraagd door ${g.naam}.`);
+  if (a.gekoppeld) { const o = aanv(a.gekoppeld); if (o) o.history.push({ soort: 'notitie', tijd: nu(), door: g.naam, notitie: `${a.losKeuze === 'hub' ? 'Inslagtransport' : 'Afroep'} ${a.id} aangevraagd.` }); }
+  bewaar();
+  return a;
+}
+
+function wijzigAanvraag(id, data, bestand) {
+  const a = aanv(id); const g = huidigeGebruiker();
+  const was = a.status;
+  Object.assign(a, data);
+  if (was === 'Bevestigd') { a.status = 'Aangevraagd'; a.history.push({ soort: 'status', status: 'Aangevraagd', tijd: nu(), door: g.naam, notitie: 'Gewijzigd door de klant. De Bouwhub bevestigt opnieuw.' }); }
+  else a.history.push({ soort: 'notitie', tijd: nu(), door: g.naam, notitie: 'Aanvraag gewijzigd door de klant.' });
+  Koppelingen.powerAutomate.start('Wijziging aanvraag', a);
+  Koppelingen.vierPS.aanvraagBijwerken(a);
+  if (bestand) { a.pakbon = { naam: bestand.name, grootte: bestand.size }; a.pakbon.pad = Koppelingen.sharepoint.pakbonOpslaan(a, a.pakbon); }
+  Koppelingen.outlook.wijziging(a);
+  Koppelingen.teams.melding(a, `Aanvraag ${a.id} gewijzigd`, `${proj(a.projectId).naam}. Controleer de wijziging en bevestig opnieuw.`);
+  bewaar();
+  return a;
+}
+
+function zetStatus(id, status, opties = {}) {
+  const a = aanv(id); const g = huidigeGebruiker();
+  if (opties.gepland) a.gepland = opties.gepland;
+  a.status = status;
+  a.history.push({ soort: 'status', status, tijd: nu(), door: g.naam, notitie: opties.notitie || '' });
+  Koppelingen.vierPS.statusVastgelegd(a, status);
+  Koppelingen.powerAutomate.start('Statuswijziging (webhook vanuit Business Central)', a);
+  Koppelingen.outlook.status(a, status, opties.notitie);
+  if (status === 'Geannuleerd') Koppelingen.teams.melding(a, `Aanvraag ${a.id} geannuleerd`, `${proj(a.projectId).naam}. Reden: ${opties.notitie || 'geen reden'}.`);
+  bewaar();
+  return a;
+}
+
+/* =====================================================================
+   WEERGAVE
+   ===================================================================== */
+const pill = s => `<span class="pill p-${PILL[s] || 'klaar'}">${esc(s)}</span>`;
+
+function rij(a, metKlant) {
+  const p = proj(a.projectId); const k = klant(a.klantId);
+  const d = hoofdDatum(a); const tv = hoofdTijdvak(a);
+  return `<li><button type="button" class="rij" data-act="open" data-id="${a.id}">
+    <span class="rij-links">
+      <span class="rij-boven"><span class="rij-id">${a.id}</span><span class="type">${typeNaam(a)}</span>${metKlant && k ? `<span>${esc(k.naam)}</span>` : ''}</span>
+      <span class="rij-titel">${esc(p ? p.naam : 'Onbekend project')}</span>
+      <span class="rij-meta">${a.type === 'transport' ? 'Lossen' : 'Inslag'} ${esc(dagKlein(d))}${tv ? ', ' + esc(tv) : ''}${a.type === 'transport' ? ` · ${a.losKeuze === 'hub' ? 'naar de hub' : a.losKeuze === 'ander' ? 'ander adres' : 'naar de bouwplaats'}` : ` · ${esc(m2Tekst(a.m2))}`}</span>
+    </span>
+    ${pill(a.status)}
+  </button></li>`;
+}
+const sorteerOpDatum = (x, y) => String(hoofdDatum(x)).localeCompare(String(hoofdDatum(y))) || String(hoofdTijdvak(x)).localeCompare(String(hoofdTijdvak(y)));
+
+const ICOON = {
+  transport: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M2 6h11v10H2zM13 9h4.5l3.5 3.5V16h-8z"/><circle cx="6" cy="17.5" r="1.8" fill="var(--green-soft)"/><circle cx="17" cy="17.5" r="1.8" fill="var(--green-soft)"/></svg>',
+  opslag: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M3 20h18M4 20v-3h16v3M6 17V9h5v8M13 17v-5h5v5M6 12.5h5M13 14.5h5"/></svg>'
+};
+/* ---------- Klant: dashboard ---------- */
+function vKlantDashboard() {
+  const g = huidigeGebruiker(); const k = klant(g.klantId);
+  const mijn = S.aanvragen.filter(a => a.klantId === g.klantId);
+  const tab = UI.p.tab || 'lopend';
+  const lopend = mijn.filter(a => !EIND.includes(a.status)).sort(sorteerOpDatum);
+  const klaar = mijn.filter(a => EIND.includes(a.status)).sort((x, y) => sorteerOpDatum(y, x));
+  const lijst = tab === 'lopend' ? lopend : klaar;
+  return `<div class="pagina">
+    <section class="intro"><p class="eyebrow">${esc(k ? k.naam : '')}</p><h1 tabindex="-1">Mijn aanvragen</h1><p class="sub">Vraag transport of opslag aan en volg hier de status.</p></section>
+    <div class="tegels">
+      <button type="button" class="tegel" data-act="nieuw" data-type="transport"><span class="tegel-icoon" aria-hidden="true">${ICOON.transport}</span><span class="tegel-titel">Transport aanvragen</span><span class="tegel-pijl" aria-hidden="true">→</span><span class="tegel-tekst">Levering naar de hub, de bouwplaats of een ander adres.</span></button>
+      <button type="button" class="tegel" data-act="nieuw" data-type="opslag"><span class="tegel-icoon" aria-hidden="true">${ICOON.opslag}</span><span class="tegel-titel">Opslag aanvragen</span><span class="tegel-pijl" aria-hidden="true">→</span><span class="tegel-tekst">Goederen tijdelijk op de hub laten staan en later afroepen.</span></button>
+    </div>
+    <div class="tabs" role="tablist">
+      <button type="button" role="tab" aria-selected="${tab === 'lopend'}" data-act="tab" data-tab="lopend">Lopend (${lopend.length})</button>
+      <button type="button" role="tab" aria-selected="${tab === 'klaar'}" data-act="tab" data-tab="klaar">Afgerond (${klaar.length})</button>
+    </div>
+    ${lijst.length ? `<ul class="lijst">${lijst.map(a => rij(a)).join('')}</ul>` : `<p class="leeg">${tab === 'lopend' ? 'U heeft geen lopende aanvragen. Start hierboven een nieuwe aanvraag.' : 'Nog geen afgeronde aanvragen.'}</p>`}
+  </div>`;
+}
+
+/* ---------- Formulierbouwstenen ---------- */
+const ster = '<span class="ster" aria-hidden="true">*</span>';
+function veld(naam, label, verplicht, inhoud, opties = {}) {
+  return `<div class="veld" data-veld="${naam}"${opties.als ? ` data-als="${opties.als}"` : ''}>
+    <label for="f-${naam}">${esc(label)}${verplicht ? ster : ''}${opties.extraLabel || ''}</label>
+    ${opties.hint ? `<p class="hint">${esc(opties.hint)}</p>` : ''}
+    ${inhoud}
+    <p class="fout" id="fout-${naam}" hidden></p>
+  </div>`;
+}
+const tekst = (naam, waarde, extra = '') => `<input type="text" id="f-${naam}" name="${naam}" value="${esc(waarde)}" ${extra}>`;
+function keuzelijst(naam, opties, waarde, leeg) {
+  return `<select id="f-${naam}" name="${naam}">${leeg ? `<option value="">${esc(leeg)}</option>` : ''}${opties.map(o => {
+    const v = typeof o === 'object' ? o.v : o; const t = typeof o === 'object' ? o.t : o;
+    return `<option value="${esc(v)}"${String(v) === String(waarde) ? ' selected' : ''}>${esc(t)}</option>`;
+  }).join('')}</select>`;
+}
+function knoppenKeuze(naam, label, opties, waarde, verplicht, opt = {}) {
+  return `<fieldset class="veld" data-veld="${naam}"${opt.als ? ` data-als="${opt.als}"` : ''}>
+    <legend class="veld-label">${esc(label)}${verplicht ? ster : ''}</legend>
+    ${opt.hint ? `<p class="hint">${esc(opt.hint)}</p>` : ''}
+    <div class="segment">${opties.map((o, i) => {
+      const v = typeof o === 'object' ? o.v : o; const t = typeof o === 'object' ? o.t : o;
+      return `<label><input type="radio" name="${naam}" value="${esc(v)}" id="f-${naam}-${i}"${String(v) === String(waarde) ? ' checked' : ''}><span>${esc(t)}</span></label>`;
+    }).join('')}</div>
+    <p class="fout" id="fout-${naam}" hidden></p>
+  </fieldset>`;
+}
+function regelHTML(r, i) {
+  r = r || { soort: '', aantal: '', eenheid: 'stuks', toelichting: '' };
+  return `<div class="regel" data-i="${i}">
+    <div class="veld"><label for="r-soort-${i}">Soort lading${ster}</label>${`<select id="r-soort-${i}" class="r-soort"><option value="">Kies</option>${CONFIG.soortLading.map(s => `<option${s === r.soort ? ' selected' : ''}>${s}</option>`).join('')}</select>`}</div>
+    <div class="veld"><label for="r-aantal-${i}">Aantal${ster}</label><input type="number" min="0" step="any" inputmode="decimal" id="r-aantal-${i}" class="r-aantal" value="${esc(r.aantal)}"></div>
+    <div class="veld"><label for="r-eenheid-${i}">Eenheid</label><select id="r-eenheid-${i}" class="r-eenheid">${CONFIG.eenheden.map(e => `<option value="${e.v}"${e.v === r.eenheid ? ' selected' : ''}>${e.t}</option>`).join('')}</select></div>
+    <button type="button" class="knop-weg" data-act="regel-min" aria-label="Regel verwijderen" title="Regel verwijderen">✕</button>
+    <div class="veld regel-toel"><label for="r-toel-${i}">Wat voor lading?${ster}</label><input type="text" id="r-toel-${i}" class="r-toel" value="${esc(r.toelichting)}" placeholder="Bijvoorbeeld bundels steigerbuizen"></div>
+    <p class="fout regel-fout" hidden></p>
+  </div>`;
+}
+function regelsBlok(regels) {
+  const lijst = regels && regels.length ? regels : [null];
+  return `<div class="veld" data-veld="regels">
+    <span class="veld-label">Lading${ster}</span>
+    <p class="hint">Eén regel per soort lading. Een levering met pallets en een glasbok zijn dus twee regels.</p>
+    <div class="regels" id="regels">${lijst.map((r, i) => regelHTML(r, i)).join('')}</div>
+    <div><button type="button" class="knop klein" data-act="regel-plus">Regel toevoegen</button></div>
+    <p class="fout" id="fout-regels" hidden></p>
+  </div>`;
+}
+function projectInfoHTML(p) {
+  if (!p) return '<p class="hint">Kies een project. Adres en contactpersoon worden dan ingevuld.</p>';
+  return `<div class="info-kaart"><strong>${esc(p.naam)} · ${esc(p.nummer)}</strong><span>${esc(p.adres)}</span><span>Uitvoering op locatie: ${esc(p.contactNaam || 'onbekend')}</span></div>`;
+}
+function aanvragerBlok(g) {
+  const k = klant(g.klantId);
+  return `<fieldset class="sectie"><legend>Aanvrager en facturatie</legend>
+    <div class="info-kaart"><strong>${esc(g.naam)}</strong><span>${esc(k ? k.naam : '')}</span><span>${esc(g.mail)} · ${esc(g.tel || '')}</span></div>
+    <p class="hint">Deze gegevens komen uit uw account. Facturatie loopt via de klantgegevens en het project, dus u vult ze niet opnieuw in.</p>
+  </fieldset>`;
+}
+
+/* ---------- Klant: formulieren ---------- */
+function standaardTransport() { return { type: 'transport', projectId: '', regels: [], laadmeter: '', gewicht: '', omschrijving: '', laadKeuze: 'ander', laadadres: '', laaddatum: '', losKeuze: 'bouwplaats', losadres: '', losdatum: '', tijdvak: '', contactNaam: '', contactTel: '', toegang: '', voertuig: 'Geen voorkeur', voertuigAnders: '', kooiaap: '', hijsen: '', kraan: '', gekoppeld: '' }; }
+function standaardOpslag() { return { type: 'opslag', projectId: '', regels: [], omschrijving: '', m2: '', gewicht: '', inslagdatum: '', duurWeken: '', afroep: '', gevaarlijk: '', gevaarlijkToelichting: '', opmerkingen: '', gekoppeld: '' }; }
+
+function vFormulier() {
+  const g = huidigeGebruiker();
+  const { type, id, afroep, naarHub } = UI.p;
+  const bestaand = id ? aanv(id) : null;
+  let v = bestaand ? kopie(bestaand) : (type === 'opslag' ? standaardOpslag() : standaardTransport());
+  let uitleg = '';
+  if (afroep) {
+    const o = aanv(afroep); const p = proj(o.projectId);
+    Object.assign(v, { projectId: o.projectId, laadKeuze: 'hub', losKeuze: 'bouwplaats', regels: kopie(o.regels), omschrijving: `Afroep uit opslag ${o.id}: ${o.omschrijving}`, gekoppeld: o.id, contactNaam: p.contactNaam, contactTel: p.contactTel, toegang: p.toegang });
+    uitleg = `Afroep uit opslag ${o.id}. Project, adressen en lading zijn al ingevuld. Pas het aantal aan als u een deel afroept.`;
+  }
+  if (naarHub) {
+    const o = aanv(naarHub);
+    Object.assign(v, { projectId: o.projectId, laadKeuze: 'ander', losKeuze: 'hub', regels: kopie(o.regels), omschrijving: `Inslag voor opslag ${o.id}: ${o.omschrijving}`, laaddatum: o.inslagdatum, losdatum: o.inslagdatum, gekoppeld: o.id });
+    uitleg = `Transport naar de hub voor opslag ${o.id}. Vul het laadadres en het tijdvak in.`;
+  }
+  const projs = projectenVanKlant(g.klantId);
+  const p = proj(v.projectId);
+  const titel = bestaand ? `${typeNaam(bestaand)}aanvraag ${bestaand.id} wijzigen` : (type === 'opslag' ? 'Nieuwe opslagaanvraag' : 'Nieuwe transportaanvraag');
+  const projVeld = veld('projectId', 'Project', true, keuzelijst('projectId', projs.map(x => ({ v: x.id, t: `${x.naam} (${x.nummer})` })), v.projectId, 'Kies een project'), { hint: 'U ziet alleen de projecten waaraan uw bedrijf gekoppeld is.' })
+    + `<div id="project-info">${projectInfoHTML(p)}</div>`;
+  const pakbonVeld = `<div class="veld bestand" data-veld="pakbon">
+      <label for="f-pakbon">Pakbon of leverdocument</label>
+      <p class="hint">PDF of foto, maximaal ${CONFIG.maxPakbonMB} MB. In het echt komt het bestand in de SharePoint map van het project (demo).</p>
+      ${v.pakbon ? `<p class="notitie">Huidige pakbon: <strong>${esc(v.pakbon.naam)}</strong>. Kies een nieuw bestand om hem te vervangen.</p>` : ''}
+      <input type="file" id="f-pakbon" name="pakbon" accept="${CONFIG.pakbonTypes}">
+      <p class="fout" id="fout-pakbon" hidden></p>
+    </div>`;
+
+  let secties;
+  if (v.type === 'transport') {
+    secties = `
+    <fieldset class="sectie"><legend>Project</legend>${projVeld}</fieldset>
+    <fieldset class="sectie"><legend>Lading</legend>
+      ${regelsBlok(v.regels)}
+      <div class="rij-velden">
+        ${veld('laadmeter', 'Laadmeter', false, `<input type="number" min="0" step="any" inputmode="decimal" id="f-laadmeter" name="laadmeter" value="${esc(v.laadmeter)}">`)}
+        ${veld('gewicht', 'Totaal gewicht in ton', false, `<input type="text" inputmode="decimal" id="f-gewicht" name="gewicht" value="${esc(v.gewicht)}" placeholder="Bijvoorbeeld 1,5">`, { extraLabel: '<span class="ster" id="gewicht-ster" hidden aria-hidden="true">*</span>', hint: 'Verplicht als er gehesen moet worden.' })}
+      </div>
+      ${veld('omschrijving', 'Omschrijving van de lading', false, `<textarea id="f-omschrijving" name="omschrijving" rows="3">${esc(v.omschrijving)}</textarea>`)}
+    </fieldset>
+    <fieldset class="sectie"><legend>Laden</legend>
+      ${knoppenKeuze('laadKeuze', 'Waar wordt geladen?', [{ v: 'ander', t: 'Bij de leverancier of een ander adres' }, { v: 'hub', t: 'Op de Bouwhub' }], v.laadKeuze, true)}
+      ${veld('laadadres', 'Laadadres', true, tekst('laadadres', v.laadadres, 'autocomplete="off" placeholder="Bedrijf, straat en plaats"'), { als: 'laadKeuze=ander' })}
+      <div class="rij-velden">${veld('laaddatum', 'Datum laden', true, `<input type="date" id="f-laaddatum" name="laaddatum" value="${esc(v.laaddatum)}">`)}</div>
+    </fieldset>
+    <fieldset class="sectie"><legend>Lossen</legend>
+      ${knoppenKeuze('losKeuze', 'Waar wordt gelost?', [{ v: 'bouwplaats', t: 'Bouwplaats van het project' }, { v: 'hub', t: 'Op de Bouwhub' }, { v: 'ander', t: 'Ander adres' }], v.losKeuze, true)}
+      <div data-als="losKeuze=bouwplaats"><div class="info-kaart"><strong>Losadres</strong><span id="bouwplaats-adres">${esc(p ? p.adres : 'Kies eerst een project.')}</span></div></div>
+      <div data-als="losKeuze=hub"><p class="hint">Moeten de goederen op de hub blijven staan? Vraag daarna ook opslag aan. Die vraag zat eerst in dit formulier.</p></div>
+      ${veld('losadres', 'Losadres', true, tekst('losadres', v.losadres, 'autocomplete="off"'), { als: 'losKeuze=ander' })}
+      <div class="rij-velden">
+        ${veld('losdatum', 'Datum lossen', true, `<input type="date" id="f-losdatum" name="losdatum" value="${esc(v.losdatum)}">`)}
+        ${veld('tijdvak', 'Tijdvak lossen', true, keuzelijst('tijdvak', CONFIG.tijdvakken, v.tijdvak, 'Kies een tijdvak'))}
+      </div>
+    </fieldset>
+    <fieldset class="sectie"><legend>Op locatie</legend>
+      <div class="rij-velden">
+        ${veld('contactNaam', 'Contactpersoon op locatie', true, tekst('contactNaam', v.contactNaam, 'autocomplete="off"'), { hint: 'De chauffeur belt deze persoon bij aankomst.' })}
+        ${veld('contactTel', 'Telefoonnummer contactpersoon', true, `<input type="tel" id="f-contactTel" name="contactTel" value="${esc(v.contactTel)}" inputmode="tel" autocomplete="off">`)}
+      </div>
+      <div data-als="losKeuze!=hub" class="formulier">
+        ${veld('toegang', 'Toegankelijkheid van de bouwplaats', false, `<textarea id="f-toegang" name="toegang" rows="3">${esc(v.toegang)}</textarea>`, { hint: 'Ingevuld vanuit het project. Pas aan als het voor deze levering anders is, zoals een afgesloten straat.' })}
+        ${knoppenKeuze('kooiaap', 'Is een kooiaap nodig?', ['Ja', 'Nee'], v.kooiaap, true)}
+        ${knoppenKeuze('hijsen', 'Moet er gehesen worden op locatie?', ['Ja', 'Nee'], v.hijsen, true)}
+        ${knoppenKeuze('kraan', 'Is er een hijskraan aanwezig op locatie?', ['Ja', 'Nee'], v.kraan, true, { als: 'hijsen=Ja' })}
+      </div>
+      ${veld('voertuig', 'Voorkeur voertuig', false, keuzelijst('voertuig', CONFIG.voertuigen, v.voertuig), { hint: 'De Bouwhub kiest het voertuig definitief bij het inplannen.' })}
+      ${veld('voertuigAnders', 'Welk voertuig?', true, tekst('voertuigAnders', v.voertuigAnders), { als: 'voertuig=Anders' })}
+    </fieldset>
+    <fieldset class="sectie"><legend>Documenten</legend>${pakbonVeld}</fieldset>`;
+  } else {
+    secties = `
+    <fieldset class="sectie"><legend>Project</legend>${projVeld}</fieldset>
+    <fieldset class="sectie"><legend>Goederen</legend>
+      ${veld('omschrijving', 'Wat wilt u laten opslaan?', true, tekst('omschrijving', v.omschrijving, 'placeholder="Bijvoorbeeld kozijnen voor blok B"'))}
+      ${regelsBlok(v.regels)}
+      <div class="rij-velden">
+        ${veld('m2', 'Benodigde vloeroppervlakte in m²', true, `<input type="text" inputmode="decimal" id="f-m2" name="m2" value="${esc(String(v.m2).replace('.', ','))}" placeholder="Bijvoorbeeld 12">`, { hint: 'Een europallet neemt ongeveer 1 m² in (120 bij 80 cm). Reken ruimte bij voor glasbokken en lange lengtes.' })}
+        ${veld('gewicht', 'Totaal gewicht in ton', false, `<input type="text" inputmode="decimal" id="f-gewicht" name="gewicht" value="${esc(v.gewicht)}">`)}
+      </div>
+      ${knoppenKeuze('gevaarlijk', 'Zitten er gevaarlijke stoffen bij?', ['Ja', 'Nee'], v.gevaarlijk, true, { hint: 'Bijvoorbeeld gasflessen, kit of verf met een gevarensymbool.' })}
+      ${veld('gevaarlijkToelichting', 'Welke stoffen en hoeveel?', true, tekst('gevaarlijkToelichting', v.gevaarlijkToelichting), { als: 'gevaarlijk=Ja' })}
+    </fieldset>
+    <fieldset class="sectie"><legend>Planning</legend>
+      <div class="rij-velden">
+        ${veld('inslagdatum', 'Verwachte inslagdatum', true, `<input type="date" id="f-inslagdatum" name="inslagdatum" value="${esc(v.inslagdatum)}">`)}
+        ${veld('duurWeken', 'Verwachte opslagduur in weken', true, `<input type="number" min="1" step="1" inputmode="numeric" id="f-duurWeken" name="duurWeken" value="${esc(v.duurWeken)}">`)}
+      </div>
+      ${knoppenKeuze('afroep', 'Hoe roept u de goederen af?', ['In één keer', 'In delen'], v.afroep, true, { hint: 'U roept af vanuit deze aanvraag zodra de goederen op de hub staan.' })}
+      <p class="hint">Het transport naar de hub vraagt u apart aan. Na verzenden kunt u dat meteen doen.</p>
+    </fieldset>
+    <fieldset class="sectie"><legend>Documenten en opmerkingen</legend>
+      ${pakbonVeld}
+      ${veld('opmerkingen', 'Opmerkingen', false, `<textarea id="f-opmerkingen" name="opmerkingen" rows="3">${esc(v.opmerkingen)}</textarea>`)}
+    </fieldset>`;
+  }
+
+  return `<form class="formulier" id="aanvraagform" novalidate data-type="${v.type}" data-id="${bestaand ? bestaand.id : ''}">
+    <button type="button" class="knop link terug" data-act="terug">← Terug</button>
+    <div class="form-kop"><p class="eyebrow">${v.type === 'transport' ? 'Transport' : 'Opslag'}</p><h1 tabindex="-1">${esc(titel)}</h1>
+      ${uitleg ? `<p class="sub">${esc(uitleg)}</p>` : ''}
+      <p class="hint">Velden met <span class="ster">*</span> zijn verplicht. U ziet alleen de vragen die bij uw keuzes horen.</p>
+      ${bestaand && bestaand.status === 'Bevestigd' ? '<p class="notitie">Deze aanvraag is al bevestigd. Na een wijziging bevestigt de Bouwhub opnieuw.</p>' : ''}
+    </div>
+    <div class="fout-samenvatting" id="fout-samenvatting" role="alert" hidden></div>
+    <input type="hidden" name="gekoppeld" value="${esc(v.gekoppeld || '')}">
+    ${secties}
+    ${aanvragerBlok(g)}
+    <div class="verzend"><button type="submit" class="knop primair">${bestaand ? 'Wijziging opslaan' : 'Aanvraag versturen'}</button><button type="button" class="knop" data-act="terug">Annuleren</button></div>
+  </form>`;
+}
+
+/* Zichtbaarheid van velden die van een keuze afhangen */
+function pasZichtbaarheidToe(f) {
+  f.querySelectorAll('[data-als]').forEach(el => {
+    const m = el.dataset.als.match(/^(\w+)(!?=)(.+)$/); if (!m) return;
+    const ctrl = f.elements[m[1]]; const w = ctrl ? ctrl.value : '';
+    const lijst = m[3].split('|');
+    el.hidden = m[2] === '=' ? !lijst.includes(w) : lijst.includes(w);
+  });
+  f.querySelectorAll('.regel').forEach(r => { r.querySelector('.regel-toel').hidden = r.querySelector('.r-soort').value !== 'Anders'; });
+  const gs = f.querySelector('#gewicht-ster');
+  if (gs) gs.hidden = !(f.elements.hijsen && f.elements.hijsen.value === 'Ja' && f.elements.losKeuze.value !== 'hub');
+}
+
+/* Project gekozen: adres en contactpersoon invullen als de klant ze nog niet zelf heeft aangepast */
+function projectGekozen(f) {
+  const p = proj(f.elements.projectId.value);
+  const info = f.querySelector('#project-info'); if (info) info.innerHTML = projectInfoHTML(p);
+  const adr = f.querySelector('#bouwplaats-adres'); if (adr) adr.textContent = p ? p.adres : 'Kies eerst een project.';
+  if (!p) return;
+  [['contactNaam', p.contactNaam], ['contactTel', p.contactTel], ['toegang', p.toegang]].forEach(([n, w]) => {
+    const el = f.elements[n]; if (!el) return;
+    if (!el.value || el.dataset.auto === '1') { el.value = w || ''; el.dataset.auto = '1'; }
+  });
+}
+
+function leesRegels(f) {
+  return [...f.querySelectorAll('.regel')].map(r => ({
+    soort: r.querySelector('.r-soort').value,
+    aantal: r.querySelector('.r-aantal').value === '' ? '' : Number(r.querySelector('.r-aantal').value),
+    eenheid: r.querySelector('.r-eenheid').value,
+    toelichting: r.querySelector('.r-soort').value === 'Anders' ? r.querySelector('.r-toel').value.trim() : ''
+  }));
+}
+function leesFormulier(f) {
+  const w = n => { const el = f.elements[n]; return el ? String(el.value || '').trim() : ''; };
+  const regels = leesRegels(f);
+  if (f.dataset.type === 'transport') {
+    const d = { type: 'transport', projectId: w('projectId'), regels, laadmeter: w('laadmeter'), gewicht: w('gewicht'), omschrijving: w('omschrijving'),
+      laadKeuze: w('laadKeuze'), laadadres: w('laadadres'), laaddatum: w('laaddatum'), losKeuze: w('losKeuze'), losadres: w('losadres'), losdatum: w('losdatum'), tijdvak: w('tijdvak'),
+      contactNaam: w('contactNaam'), contactTel: w('contactTel'), toegang: w('toegang'), voertuig: w('voertuig'), voertuigAnders: w('voertuigAnders'),
+      kooiaap: w('kooiaap'), hijsen: w('hijsen'), kraan: w('kraan'), gekoppeld: w('gekoppeld') || null };
+    if (d.laadKeuze === 'hub') d.laadadres = '';
+    if (d.losKeuze !== 'ander') d.losadres = '';
+    if (d.losKeuze === 'hub') { d.toegang = ''; d.kooiaap = ''; d.hijsen = ''; d.kraan = ''; }
+    if (d.hijsen !== 'Ja') d.kraan = '';
+    if (d.voertuig !== 'Anders') d.voertuigAnders = '';
+    return d;
+  }
+  const d = { type: 'opslag', projectId: w('projectId'), regels, omschrijving: w('omschrijving'), m2: w('m2'), gewicht: w('gewicht'),
+    inslagdatum: w('inslagdatum'), duurWeken: w('duurWeken'), afroep: w('afroep'), gevaarlijk: w('gevaarlijk'), gevaarlijkToelichting: w('gevaarlijkToelichting'), opmerkingen: w('opmerkingen'), gekoppeld: w('gekoppeld') || null };
+  if (d.gevaarlijk !== 'Ja') d.gevaarlijkToelichting = '';
+  return d;
+}
+
+const isGetal = s => s !== '' && !isNaN(Number(String(s).replace(',', '.'))) && Number(String(s).replace(',', '.')) > 0;
+function valideer(d, bestaand, bestand) {
+  const fouten = {}; const regelFouten = {};
+  if (!d.projectId) fouten.projectId = 'Kies een project.';
+  if (!d.regels.length) fouten.regels = 'Voeg minimaal één regel lading toe.';
+  d.regels.forEach((r, i) => {
+    const m = [];
+    if (!r.soort) m.push('kies de soort lading');
+    if (!(r.aantal > 0)) m.push('vul een aantal groter dan 0 in');
+    if (r.soort === 'Anders' && !r.toelichting) m.push('beschrijf wat voor lading het is');
+    if (m.length) regelFouten[i] = 'Regel ' + (i + 1) + ': ' + m.join(' en ') + '.';
+  });
+  if (Object.keys(regelFouten).length) fouten.regels = 'Controleer de ladingregels.';
+  if (d.gewicht && !isGetal(d.gewicht)) fouten.gewicht = 'Vul het gewicht in als getal, bijvoorbeeld 1,5.';
+  const vandaag = dag(0);
+  if (d.type === 'transport') {
+    if (!d.laadKeuze) fouten.laadKeuze = 'Kies waar geladen wordt.';
+    if (d.laadKeuze === 'ander' && !d.laadadres) fouten.laadadres = 'Vul het laadadres in.';
+    if (!d.laaddatum) fouten.laaddatum = 'Kies een datum voor het laden.';
+    else if (!bestaand && d.laaddatum < vandaag) fouten.laaddatum = 'Kies een datum vanaf vandaag.';
+    if (!d.losKeuze) fouten.losKeuze = 'Kies waar gelost wordt.';
+    if (d.losKeuze === 'ander' && !d.losadres) fouten.losadres = 'Vul het losadres in.';
+    if (!d.losdatum) fouten.losdatum = 'Kies een datum voor het lossen.';
+    else if (d.laaddatum && d.losdatum < d.laaddatum) fouten.losdatum = 'De losdatum ligt voor de laaddatum.';
+    if (!d.tijdvak) fouten.tijdvak = 'Kies een tijdvak voor het lossen.';
+    if (!d.contactNaam) fouten.contactNaam = 'Vul de naam van de contactpersoon op locatie in.';
+    if (!d.contactTel) fouten.contactTel = 'Vul het telefoonnummer van de contactpersoon in.';
+    else if ((d.contactTel.match(/\d/g) || []).length < 10) fouten.contactTel = 'Vul een telefoonnummer van minimaal 10 cijfers in.';
+    if (d.losKeuze !== 'hub') {
+      if (!d.kooiaap) fouten.kooiaap = 'Geef aan of er een kooiaap nodig is.';
+      if (!d.hijsen) fouten.hijsen = 'Geef aan of er gehesen moet worden.';
+      if (d.hijsen === 'Ja') {
+        if (!d.kraan) fouten.kraan = 'Geef aan of er een hijskraan aanwezig is.';
+        if (!d.gewicht) fouten.gewicht = 'Vul het gewicht in. Dat is nodig om te kunnen hijsen.';
+      }
+    }
+    if (d.voertuig === 'Anders' && !d.voertuigAnders) fouten.voertuigAnders = 'Beschrijf welk voertuig u wilt.';
+  } else {
+    if (!d.omschrijving) fouten.omschrijving = 'Beschrijf wat u wilt laten opslaan.';
+    if (!d.m2) fouten.m2 = 'Vul in hoeveel m² u nodig heeft.';
+    else if (!isGetal(d.m2)) fouten.m2 = 'Vul de oppervlakte in als getal, bijvoorbeeld 12 of 7,5.';
+    if (!d.gevaarlijk) fouten.gevaarlijk = 'Geef aan of er gevaarlijke stoffen bij zitten.';
+    if (d.gevaarlijk === 'Ja' && !d.gevaarlijkToelichting) fouten.gevaarlijkToelichting = 'Beschrijf welke stoffen het zijn en hoeveel.';
+    if (!d.inslagdatum) fouten.inslagdatum = 'Kies de verwachte inslagdatum.';
+    else if (!bestaand && d.inslagdatum < vandaag) fouten.inslagdatum = 'Kies een datum vanaf vandaag.';
+    if (!d.duurWeken) fouten.duurWeken = 'Vul de verwachte opslagduur in.';
+    else if (!(Number(d.duurWeken) >= 1)) fouten.duurWeken = 'Vul minimaal 1 week in.';
+    if (!d.afroep) fouten.afroep = 'Kies hoe u de goederen afroept.';
+  }
+  if (bestand) {
+    const ext = (bestand.name.split('.').pop() || '').toLowerCase();
+    if (!['pdf', 'jpg', 'jpeg', 'png'].includes(ext)) fouten.pakbon = 'Kies een PDF, JPG of PNG bestand.';
+    else if (bestand.size > CONFIG.maxPakbonMB * 1024 * 1024) fouten.pakbon = `Het bestand is groter dan ${CONFIG.maxPakbonMB} MB.`;
+  }
+  return { fouten, regelFouten };
+}
+function toonFouten(f, { fouten, regelFouten }) {
+  f.querySelectorAll('.heeft-fout').forEach(el => el.classList.remove('heeft-fout'));
+  f.querySelectorAll('.fout').forEach(el => { el.hidden = true; el.textContent = ''; });
+  f.querySelectorAll('[aria-invalid]').forEach(el => el.removeAttribute('aria-invalid'));
+  let eerste = null;
+  Object.entries(fouten).forEach(([naam, msg]) => {
+    const wrap = f.querySelector(`[data-veld="${naam}"]`); const p = f.querySelector(`#fout-${naam}`);
+    if (wrap) wrap.classList.add('heeft-fout');
+    if (p) { p.textContent = msg; p.hidden = false; }
+    const ctrl = f.querySelector(`#f-${naam}`) || f.querySelector(`#f-${naam}-0`);
+    if (ctrl) { ctrl.setAttribute('aria-invalid', 'true'); if (p) ctrl.setAttribute('aria-describedby', p.id); }
+  });
+  Object.entries(regelFouten).forEach(([i, msg]) => {
+    const r = f.querySelector(`.regel[data-i="${i}"]`); if (!r) return;
+    const p = r.querySelector('.regel-fout'); p.textContent = msg; p.hidden = false;
+    const leeg = [...r.querySelectorAll('select, input')].find(el => !el.closest('[hidden]') && !el.value);
+    if (leeg) leeg.setAttribute('aria-invalid', 'true');
+  });
+  const aantal = Object.keys(fouten).length;
+  const sam = f.querySelector('#fout-samenvatting');
+  if (aantal) {
+    sam.hidden = false;
+    sam.textContent = aantal === 1 ? 'Eén veld is nog niet goed ingevuld. Het is rood gemarkeerd.' : `${aantal} velden zijn nog niet goed ingevuld. Ze zijn rood gemarkeerd.`;
+    eerste = f.querySelector('[aria-invalid="true"]');
+    if (eerste) { eerste.focus({ preventScroll: true }); eerste.scrollIntoView({ block: 'center', behavior: 'smooth' }); }
+  } else sam.hidden = true;
+  return aantal === 0;
+}
+function verstuurFormulier(f) {
+  const d = leesFormulier(f);
+  const bestand = f.elements.pakbon && f.elements.pakbon.files ? f.elements.pakbon.files[0] : null;
+  const bestaand = f.dataset.id ? aanv(f.dataset.id) : null;
+  if (!toonFouten(f, valideer(d, bestaand, bestand))) return;
+  if (d.type === 'opslag') d.m2 = Number(String(d.m2).replace(',', '.')), d.duurWeken = Number(d.duurWeken);
+  if (bestaand) {
+    const a = wijzigAanvraag(bestaand.id, d, bestand);
+    toast(`Wijziging van ${a.id} opgeslagen`, 'Demo: naar 4PS, Outlook en Teams gestuurd');
+    ga('k-detail', { id: a.id });
+  } else {
+    const a = nieuweAanvraag(d, bestand);
+    ga('k-klaar', { id: a.id });
+  }
+}
+
+/* ---------- Klant: na verzenden ---------- */
+function vKlaar() {
+  const a = aanv(UI.p.id); if (!a) return vNietGevonden();
+  const mail = S.berichten.find(m => m.aanvraagId === a.id);
+  const log = S.log.filter(l => l.aanvraagId === a.id).slice().reverse();
+  return `<div class="pagina">
+    <section class="intro"><p class="eyebrow">${typeNaam(a)} · ${a.id}</p><h1 tabindex="-1">Uw aanvraag is verstuurd</h1>
+      <p class="sub">De aanvraag staat in uw overzicht met status ${pill(a.status)} en is zichtbaar voor de Bouwhub.</p></section>
+    <div class="knoppen">
+      <button type="button" class="knop primair" data-act="open" data-id="${a.id}">Aanvraag bekijken</button>
+      ${a.type === 'opslag' ? `<button type="button" class="knop" data-act="naar-hub" data-id="${a.id}">Transport naar de hub aanvragen</button>` : ''}
+      <button type="button" class="knop" data-act="nav" data-view="k-dashboard">Naar mijn aanvragen</button>
+    </div>
+    <div class="detail-grid">
+      <section class="blok"><div class="blok-kop"><h2>Bevestiging per mail</h2><span class="demo-tag">Demo</span></div><p class="notitie">Zo ziet de bevestiging eruit die de klant per Outlook zou krijgen.</p>${mail ? mailKaart(mail) : ''}</section>
+      <section class="blok"><div class="blok-kop"><h2>Wat er achter de schermen gebeurt</h2><span class="demo-tag">Demo</span></div><p class="notitie">Nagebootst. Er is niets echt verstuurd.</p>${logLijst(log)}</section>
+    </div>
+  </div>`;
+}
+
+/* ---------- Bouwstenen detail ---------- */
+function mailKaart(m) {
+  return `<article class="mail"><div class="mail-kop"><span class="demo-tag">Demo</span><span>Voorbeeld van een Outlook bericht</span></div>
+    <dl class="mail-meta"><div><dt>Van</dt><dd>${esc(m.van)}</dd></div><div><dt>Aan</dt><dd>${esc(m.aan)}</dd></div><div><dt>Onderwerp</dt><dd><strong>${esc(m.onderwerp)}</strong></dd></div></dl>
+    <div class="mail-tekst">${m.tekst.map(r => `<p>${esc(r)}</p>`).join('')}</div>
+    <p class="mail-voet">Niet echt verstuurd · ${fmtMoment(m.tijd)}</p></article>`;
+}
+function teamsKaart(t) {
+  return `<article class="teamsbericht"><div class="mail-kop"><span class="demo-tag">Demo</span><span>Teams · kanaal Bouwhub planning</span></div>
+    <div class="teams-tekst"><strong>${esc(t.titel)}</strong>${esc(t.tekst)}</div><p class="teams-voet">Niet echt verstuurd · ${fmtMoment(t.tijd)}</p></article>`;
+}
+function logLijst(log) {
+  if (!log.length) return '<p class="notitie">Nog niets gebeurd.</p>';
+  return `<ul class="log">${log.map(l => `<li><span class="log-sys">${esc(l.systeem)}</span><span class="log-tekst">${esc(l.tekst)}</span><span class="log-meta">${l.richting ? esc(l.richting) + ' · ' : ''}${fmtMoment(l.tijd)} · demo</span></li>`).join('')}</ul>`;
+}
+function statusverloop(a) {
+  const flow = FLOW[a.type];
+  const gestopt = ['Afgewezen', 'Geannuleerd'].includes(a.status);
+  const statusEntries = a.history.filter(h => h.soort === 'status');
+  const laatste = s => { for (let i = statusEntries.length - 1; i >= 0; i--) if (statusEntries[i].status === s) return statusEntries[i]; return null; };
+  let huidigeIndex = flow.indexOf(a.status);
+  if (gestopt) { const voor = statusEntries.filter(h => flow.includes(h.status)); huidigeIndex = voor.length ? flow.indexOf(voor[voor.length - 1].status) : 0; }
+  const stappen = flow.map((s, i) => {
+    const h = i <= huidigeIndex ? laatste(s) : null;
+    const klasse = i < huidigeIndex || (i === huidigeIndex && (EIND.includes(a.status) || gestopt)) ? 'gedaan' : i === huidigeIndex ? 'huidig' : 'later';
+    return `<li class="stap ${klasse}"><span class="stip" aria-hidden="true"></span><div><div class="stap-naam">${esc(s)}${klasse === 'huidig' ? ' <span class="notitie">(nu)</span>' : ''}</div>
+      ${h ? `<div class="stap-meta">${fmtMoment(h.tijd)} · ${esc(h.door)}</div>${h.notitie ? `<div class="stap-meta">${esc(h.notitie)}</div>` : ''}` : ''}</div></li>`;
+  });
+  if (gestopt) {
+    const h = laatste(a.status);
+    stappen.splice(huidigeIndex + 1, flow.length, `<li class="stap stop"><span class="stip" aria-hidden="true"></span><div><div class="stap-naam">${esc(a.status)}</div>${h ? `<div class="stap-meta">${fmtMoment(h.tijd)} · ${esc(h.door)}</div>${h.notitie ? `<div class="stap-meta">Reden: ${esc(h.notitie)}</div>` : ''}` : ''}</div></li>`);
+  }
+  const notities = a.history.filter(h => h.soort === 'notitie');
+  return `<ol class="verloop">${stappen.join('')}</ol>
+    ${notities.length ? `<ul class="notities">${notities.map(n => `<li>${fmtMoment(n.tijd)} · ${esc(n.door)}: ${esc(n.notitie)}</li>`).join('')}</ul>` : ''}`;
+}
+function gegevens(a) {
+  const p = proj(a.projectId); const g = gebr(a.aanvragerId); const k = klant(a.klantId);
+  const r = (t, w) => w === '' || w == null ? '' : `<dt>${esc(t)}</dt><dd>${w}</dd>`;
+  const kop = t => `<div class="groep-kop">${esc(t)}</div>`;
+  const regels = (a.regels || []).map(x => esc(regelTekst(x))).join('<br>');
+  const pakbon = a.pakbon ? `${esc(a.pakbon.naam)}<br><span class="notitie">SharePoint (demo): ${esc(a.pakbon.pad || '')}</span>` : 'Geen pakbon toegevoegd';
+  const gepland = a.gepland ? esc(`${fmtDag(a.gepland.datum)}${a.gepland.tijdvak ? ', ' + a.gepland.tijdvak : ''}${a.gepland.voertuig ? ', ' + a.gepland.voertuig : ''}`) : '';
+  const gekoppeld = a.gekoppeld ? `<button type="button" class="knop link" data-act="open" data-id="${esc(a.gekoppeld)}">${esc(a.gekoppeld)}</button>` : '';
+  let h = kop('Algemeen') + r('Project', esc(`${p ? p.naam : ''} (${p ? p.nummer : ''})`)) + r('Aanvrager', esc(`${g ? g.naam : ''}, ${k ? k.naam : ''}`)) + r('Aangevraagd op', fmtMoment(a.aangemaakt)) + r('Ingepland', gepland) + r('Gekoppeld aan', gekoppeld);
+  if (a.type === 'transport') {
+    h += kop('Lading') + r('Lading', regels) + r('Laadmeter', esc(a.laadmeter)) + r('Gewicht', a.gewicht ? esc(a.gewicht + ' ton') : '') + r('Omschrijving', esc(a.omschrijving));
+    h += kop('Laden en lossen') + r('Laden', esc(`${adresTekst(a, 'laad')}, ${fmtDag(a.laaddatum)}`)) + r('Lossen', esc(`${adresTekst(a, 'los')}, ${fmtDag(a.losdatum)}, ${a.tijdvak}`));
+    h += kop('Op locatie') + r('Contactpersoon', esc(`${a.contactNaam}, ${a.contactTel}`)) + r('Toegankelijkheid', esc(a.toegang)) + r('Kooiaap nodig', esc(a.kooiaap)) + r('Hijsen op locatie', esc(a.hijsen)) + r('Hijskraan aanwezig', esc(a.kraan)) + r('Voorkeur voertuig', esc(a.voertuig === 'Anders' ? a.voertuigAnders : a.voertuig));
+  } else {
+    h += kop('Goederen') + r('Omschrijving', esc(a.omschrijving)) + r('Lading', regels) + r('Vloeroppervlakte', esc(m2Tekst(a.m2))) + r('Gewicht', a.gewicht ? esc(a.gewicht + ' ton') : '') + r('Gevaarlijke stoffen', esc(a.gevaarlijk === 'Ja' ? 'Ja: ' + a.gevaarlijkToelichting : a.gevaarlijk));
+    h += kop('Planning') + r('Inslag', esc(fmtDag(a.inslagdatum))) + r('Opslagduur', esc(`${a.duurWeken} weken, tot ongeveer ${fmtDag(plusDagen(a.inslagdatum, Number(a.duurWeken) * 7))}`)) + r('Afroep', esc(a.afroep)) + r('Opmerkingen', esc(a.opmerkingen));
+  }
+  h += kop('Documenten') + r('Pakbon', pakbon);
+  return `<dl class="gegevens">${h}</dl>`;
+}
+
+/* ---------- Detail (klant en medewerker) ---------- */
+function vDetail() {
+  const a = aanv(UI.p.id); if (!a) return vNietGevonden();
+  const p = proj(a.projectId); const k = klant(a.klantId);
+  const mails = S.berichten.filter(m => m.aanvraagId === a.id);
+  const teams = S.teams.filter(t => t.aanvraagId === a.id);
+  const log = S.log.filter(l => l.aanvraagId === a.id);
+  const acties = UI.rol === 'klant' ? klantActies(a) : UI.rol === 'medewerker' ? medewerkerActies(a) : '';
+  return `<div class="pagina">
+    <button type="button" class="knop link terug" data-act="terug">← Terug</button>
+    <header class="detail-kop"><div><p class="eyebrow">${typeNaam(a)} · ${a.id}</p><h1 tabindex="-1">${esc(p ? p.naam : '')}</h1>
+      <p class="sub">${a.type === 'transport' ? 'Lossen' : 'Inslag'} ${esc(dagKlein(hoofdDatum(a)))}${hoofdTijdvak(a) ? ', ' + esc(hoofdTijdvak(a)) : ''} · ${esc(k ? k.naam : '')}</p></div>${pill(a.status)}</header>
+    ${acties}
+    <div class="detail-grid">
+      <section class="blok"><h2>Statusverloop</h2>${statusverloop(a)}</section>
+      <section class="blok"><h2>Gegevens</h2>${gegevens(a)}</section>
+    </div>
+    <details class="blok"${UI.rol === 'klant' && mails.length ? '' : ''}><summary>Berichten aan de klant <span class="demo-tag">Demo</span> <span class="notitie">${mails.length}</span></summary>
+      <div class="stapel">${mails.length ? mails.map(mailKaart).join('') : '<p class="notitie">Nog geen berichten voor deze aanvraag in dit prototype.</p>'}</div></details>
+    ${UI.rol !== 'klant' ? `<details class="blok"><summary>Teams meldingen <span class="demo-tag">Demo</span> <span class="notitie">${teams.length}</span></summary><div class="stapel">${teams.length ? teams.map(teamsKaart).join('') : '<p class="notitie">Nog geen meldingen voor deze aanvraag.</p>'}</div></details>` : ''}
+    <details class="blok"><summary>Achter de schermen <span class="demo-tag">Demo</span> <span class="notitie">${log.length}</span></summary>${logLijst(log)}</details>
+  </div>`;
+}
+
+function klantActies(a) {
+  if (UI.p.annuleer) {
+    return `<form class="actiebalk" id="annuleerform" novalidate>
+      <h2>Aanvraag ${a.id} annuleren</h2>
+      ${veld('reden', 'Waarom annuleert u?', true, `<textarea id="f-reden" name="reden" rows="2"></textarea>`)}
+      <div class="knoppen"><button type="submit" class="knop gevaar">Ja, annuleren</button><button type="button" class="knop" data-act="annuleer-sluit">Niet annuleren</button></div>
+    </form>`;
+  }
+  const kan = CONFIG.wijzigbaarIn.includes(a.status);
+  const knoppen = [];
+  let tekstje = '';
+  if (kan) {
+    knoppen.push(`<button type="button" class="knop primair" data-act="wijzig" data-id="${a.id}">Wijzigen</button>`, `<button type="button" class="knop gevaar-licht" data-act="annuleer-open">Annuleren</button>`);
+    tekstje = a.status === 'Bevestigd' ? 'U kunt deze aanvraag nog wijzigen of annuleren. Na een wijziging bevestigt de Bouwhub opnieuw.' : 'U kunt deze aanvraag nog wijzigen of annuleren tot de Bouwhub hem inplant.';
+  } else if (!EIND.includes(a.status)) {
+    tekstje = 'Deze aanvraag is ingepland en kan niet meer zelf gewijzigd worden. Neem voor wijzigingen contact op met de Bouwhub planning.';
+  }
+  if (a.type === 'opslag' && a.status === 'In opslag') { knoppen.unshift(`<button type="button" class="knop primair" data-act="afroep" data-id="${a.id}">Afroepen naar de bouwplaats</button>`); tekstje = 'De goederen staan op de hub. Roep ze in één keer of in delen af.'; }
+  if (a.type === 'opslag' && ['Aangevraagd', 'Bevestigd'].includes(a.status)) knoppen.push(`<button type="button" class="knop" data-act="naar-hub" data-id="${a.id}">Transport naar de hub aanvragen</button>`);
+  if (!tekstje && !knoppen.length) return '';
+  return `<div class="actiebalk${kan || knoppen.length ? '' : ' rustig'}">${tekstje ? `<p>${esc(tekstje)}</p>` : ''}${knoppen.length ? `<div class="knoppen">${knoppen.join('')}</div>` : ''}</div>`;
+}
+
+function medewerkerActies(a) {
+  if (UI.p.afwijs) {
+    return `<form class="actiebalk" id="afwijsform" novalidate><h2>Aanvraag ${a.id} afwijzen</h2>
+      ${veld('reden', 'Reden voor de klant', true, `<textarea id="f-reden" name="reden" rows="2"></textarea>`)}
+      <div class="knoppen"><button type="submit" class="knop gevaar">Afwijzen</button><button type="button" class="knop" data-act="sluit-form">Terug</button></div></form>`;
+  }
+  if (UI.p.inplan) {
+    return `<form class="actiebalk" id="inplanform" novalidate><h2>Aanvraag ${a.id} inplannen</h2>
+      <div class="rij-velden">
+        ${veld('datum', a.type === 'transport' ? 'Datum levering' : 'Datum inslag', true, `<input type="date" id="f-datum" name="datum" value="${esc(hoofdDatum(a))}">`)}
+        ${veld('tijdvak', 'Tijdvak', true, keuzelijst('tijdvak', CONFIG.tijdvakken, hoofdTijdvak(a) || CONFIG.tijdvakken[0]))}
+        ${a.type === 'transport' ? veld('voertuig', 'Voertuig', true, keuzelijst('voertuig', CONFIG.voertuigen.filter(x => x !== 'Geen voorkeur' && x !== 'Anders'), a.voertuig && a.voertuig !== 'Geen voorkeur' ? a.voertuig : 'Bakwagen')) : ''}
+      </div>
+      <div class="knoppen"><button type="submit" class="knop primair">Inplannen</button><button type="button" class="knop" data-act="sluit-form">Terug</button></div></form>`;
+  }
+  const knop = (naar, label, primair) => `<button type="button" class="knop${primair ? ' primair' : ''}" data-act="status" data-id="${a.id}" data-naar="${naar}">${esc(label)}</button>`;
+  let knoppen = []; let tekstje = '';
+  switch (a.status) {
+    case 'Aangevraagd': tekstje = 'Nieuwe aanvraag. Controleer de gegevens en bevestig of wijs af.'; knoppen = [knop('Bevestigd', 'Bevestigen', true), `<button type="button" class="knop gevaar-licht" data-act="afwijs-open">Afwijzen</button>`]; break;
+    case 'Bevestigd': tekstje = 'Bevestigd. Plan de aanvraag in om datum, tijdvak en voertuig vast te leggen.'; knoppen = [`<button type="button" class="knop primair" data-act="inplan-open">Inplannen</button>`]; break;
+    case 'Ingepland': tekstje = a.type === 'transport' ? 'Ingepland. Meld de rit als onderweg zodra het voertuig vertrekt.' : 'Ingepland. Meld de goederen als ontvangen zodra ze op de hub staan.'; knoppen = [a.type === 'transport' ? knop('Onderweg', 'Op weg melden', true) : knop('In opslag', 'Ontvangen op de hub', true)]; break;
+    case 'Onderweg': tekstje = 'Onderweg naar het losadres.'; knoppen = [knop('Geleverd', 'Geleverd melden', true)]; break;
+    case 'In opslag': tekstje = 'Staat in opslag. Rond af als alles is afgeroepen.'; knoppen = [knop('Afgerond', 'Opslag afronden', false)]; break;
+    default: return `<div class="actiebalk rustig"><p>Deze aanvraag is ${esc(a.status.toLowerCase())}. Er zijn geen acties meer.</p></div>`;
+  }
+  return `<div class="actiebalk"><p>${esc(tekstje)}</p><div class="knoppen">${knoppen.join('')}</div></div>`;
+}
+
+/* ---------- Medewerker: binnengekomen ---------- */
+function filterAanvragen() {
+  const f = UI.f; const z = f.zoek.toLowerCase();
+  return S.aanvragen.filter(a => {
+    if (f.status === 'open' && EIND.includes(a.status)) return false;
+    if (f.status !== 'open' && f.status !== 'alle' && a.status !== f.status) return false;
+    if (f.type !== 'alle' && a.type !== f.type) return false;
+    if (f.project !== 'alle' && a.projectId !== f.project) return false;
+    if (z) { const p = proj(a.projectId); const k = klant(a.klantId); if (![a.id, p && p.naam, p && p.nummer, k && k.naam].join(' ').toLowerCase().includes(z)) return false; }
+    return true;
+  }).sort((x, y) => (x.status === 'Aangevraagd' ? 0 : 1) - (y.status === 'Aangevraagd' ? 0 : 1) || sorteerOpDatum(x, y));
+}
+function vInbox() {
+  const nieuw = S.aanvragen.filter(a => a.status === 'Aangevraagd').length;
+  const bev = S.aanvragen.filter(a => a.status === 'Bevestigd').length;
+  const vandaag = S.aanvragen.filter(a => hoofdDatum(a) === dag(0) && !EIND.includes(a.status)).length;
+  const f = UI.f;
+  const kg = (status, n, label) => `<button type="button" class="kengetal" data-act="snelfilter" data-status="${status}" aria-pressed="${f.status === status}"><span class="stat-waarde">${n}</span><span>${label}</span></button>`;
+  return `<div class="pagina">
+    <section class="intro"><p class="eyebrow">Bouwhub medewerker</p><h1 tabindex="-1">Binnengekomen aanvragen</h1><p class="sub">Bevestig nieuwe aanvragen, plan ze in en werk de status bij.</p></section>
+    <div class="samenvatting">${kg('Aangevraagd', nieuw, 'Nieuw, nog bevestigen')}${kg('Bevestigd', bev, 'Bevestigd, nog inplannen')}<button type="button" class="kengetal" data-act="nav" data-view="m-planning"><span class="stat-waarde">${vandaag}</span><span>Vandaag op de planning</span></button></div>
+    <div class="twee-kolom">
+      <div class="pagina" style="gap:14px">
+        <div class="filters" id="filters">
+          <div class="veld"><label for="flt-status">Status</label>${`<select id="flt-status" data-filter="status"><option value="open"${f.status === 'open' ? ' selected' : ''}>Alle open</option><option value="alle"${f.status === 'alle' ? ' selected' : ''}>Alles</option>${ALLE_STATUSSEN.map(s => `<option${f.status === s ? ' selected' : ''}>${s}</option>`).join('')}</select>`}</div>
+          <div class="veld"><label for="flt-type">Soort</label><select id="flt-type" data-filter="type"><option value="alle">Transport en opslag</option><option value="transport"${f.type === 'transport' ? ' selected' : ''}>Transport</option><option value="opslag"${f.type === 'opslag' ? ' selected' : ''}>Opslag</option></select></div>
+          <div class="veld"><label for="flt-project">Project</label><select id="flt-project" data-filter="project"><option value="alle">Alle projecten</option>${S.projecten.map(p => `<option value="${p.id}"${f.project === p.id ? ' selected' : ''}>${esc(p.naam)}</option>`).join('')}</select></div>
+          <div class="veld"><label for="flt-zoek">Zoeken</label><input type="text" id="flt-zoek" data-filter="zoek" value="${esc(f.zoek)}" placeholder="Nummer, project of klant"></div>
+        </div>
+        <div id="inbox-lijst"></div>
+      </div>
+      <aside class="blok"><div class="blok-kop"><h2>Teams kanaal</h2><span class="demo-tag">Demo</span></div>
+        <p class="notitie">Meldingen die Power Automate in het Teams kanaal van het team zou zetten.</p>
+        <div class="stapel">${S.teams.slice(0, 4).map(teamsKaart).join('') || '<p class="notitie">Nog geen meldingen. Dien als klant een aanvraag in.</p>'}</div></aside>
+    </div>
+  </div>`;
+}
+function renderInboxLijst() {
+  const el = document.getElementById('inbox-lijst'); if (!el) return;
+  const lijst = filterAanvragen();
+  el.innerHTML = `<p class="notitie" style="margin-bottom:10px">${lijst.length} ${lijst.length === 1 ? 'aanvraag' : 'aanvragen'}</p>` + (lijst.length ? `<ul class="lijst">${lijst.map(a => rij(a, true)).join('')}</ul>` : '<p class="leeg">Geen aanvragen met deze filters.</p>');
+}
+
+/* ---------- Medewerker: planning ---------- */
+function vPlanning() {
+  const items = S.aanvragen.filter(a => ['Bevestigd', 'Ingepland', 'Onderweg'].includes(a.status)).sort(sorteerOpDatum);
+  const groepen = {};
+  items.forEach(a => { const d = hoofdDatum(a) || 'onbekend'; (groepen[d] = groepen[d] || []).push(a); });
+  const vandaag = dag(0);
+  const html = Object.keys(groepen).sort().map(d => `<section class="dag-groep">
+      <div class="dag-kop"><h2>${d === 'onbekend' ? 'Geen datum' : esc(dagTekst(d))}</h2><span class="teller-tekst">${groepen[d].length} ${groepen[d].length === 1 ? 'aanvraag' : 'aanvragen'}</span>${d < vandaag ? '<span class="waarschuwing">Datum is voorbij, nog niet afgerond</span>' : ''}</div>
+      <ul class="lijst">${groepen[d].map(a => rij(a, true)).join('')}</ul></section>`).join('');
+  return `<div class="pagina">
+    <section class="intro"><p class="eyebrow">Bouwhub medewerker</p><h1 tabindex="-1">Planning per dag</h1><p class="sub">Bevestigde, ingeplande en lopende aanvragen op leverdatum of inslagdatum, op volgorde van tijdvak.</p></section>
+    ${html || '<p class="leeg">Er staat niets op de planning.</p>'}
+  </div>`;
+}
+
+/* ---------- Beheerder: kerncijfers ---------- */
+function urenTussen(a, van, tot) {
+  const h1 = a.history.find(h => h.soort === 'status' && h.status === van); const h2 = a.history.find(h => h.soort === 'status' && h.status === tot);
+  return h1 && h2 ? (new Date(h2.tijd) - new Date(h1.tijd)) / 36e5 : null;
+}
+const gemiddelde = arr => arr.length ? arr.reduce((t, x) => t + x, 0) / arr.length : null;
+const nl = (n, d = 1) => n == null ? 'geen data' : n.toLocaleString('nl-NL', { maximumFractionDigits: d, minimumFractionDigits: 0 });
+function vCijfers() {
+  const alle = S.aanvragen;
+  const open = alle.filter(a => !EIND.includes(a.status)).length;
+  const telling = ALLE_STATUSSEN.map(s => ({ s, n: alle.filter(a => a.status === s).length }));
+  const max = Math.max(1, ...telling.map(t => t.n));
+  const bezet = alle.filter(a => a.type === 'opslag' && a.status === 'In opslag').reduce((t, a) => t + Number(a.m2 || 0), 0);
+  const gereserveerd = alle.filter(a => a.type === 'opslag' && ['Aangevraagd', 'Bevestigd', 'Ingepland'].includes(a.status)).reduce((t, a) => t + Number(a.m2 || 0), 0);
+  const cap = CONFIG.opslagCapaciteitM2;
+  const pct = Math.round(bezet / cap * 100);
+  const totBevestiging = gemiddelde(alle.map(a => urenTussen(a, 'Aangevraagd', 'Bevestigd')).filter(x => x != null));
+  const totLevering = gemiddelde(alle.filter(a => a.type === 'transport').map(a => urenTussen(a, 'Aangevraagd', 'Geleverd')).filter(x => x != null));
+  const perProject = S.projecten.map(p => {
+    const l = alle.filter(a => a.projectId === p.id);
+    return { p, totaal: l.length, open: l.filter(a => !EIND.includes(a.status)).length, pp: l.filter(a => a.type === 'opslag' && a.status === 'In opslag').reduce((t, a) => t + Number(a.m2 || 0), 0) };
+  }).sort((x, y) => y.totaal - x.totaal);
+  const b = Math.min(100, bezet / cap * 100), r = Math.min(100 - b, gereserveerd / cap * 100);
+  return `<div class="pagina">
+    <section class="intro"><p class="eyebrow">Beheer · voorbeeld van Power BI <span class="demo-tag">Demo</span></p><h1 tabindex="-1">Kerncijfers</h1>
+      <p class="sub">Zo ziet het overzicht er later in Power BI uit. Dan komen de cijfers uit Business Central. Nu worden ze berekend uit de nepdata in dit prototype.</p></section>
+    <div class="stats">
+      <div class="stat"><span class="stat-label">Open aanvragen</span><span class="stat-waarde">${open}</span><span class="stat-sub">van ${alle.length} in totaal</span></div>
+      <div class="stat"><span class="stat-label">Bezetting opslag</span><span class="stat-waarde">${pct}%</span><span class="stat-sub">${nl(bezet)} van ${cap} m²</span></div>
+      <div class="stat"><span class="stat-label">Van aanvraag tot bevestiging</span><span class="stat-waarde">${nl(totBevestiging)} uur</span><span class="stat-sub">gemiddeld</span></div>
+      <div class="stat"><span class="stat-label">Van aanvraag tot levering</span><span class="stat-waarde">${totLevering == null ? 'geen data' : nl(totLevering / 24) + ' dagen'}</span><span class="stat-sub">gemiddeld, alleen transport</span></div>
+    </div>
+    <div class="detail-grid gelijk">
+      <section class="blok"><h2>Aanvragen per status</h2>
+        <div class="balken" role="list">${telling.map(t => `<div class="balk-rij" role="listitem" title="${esc(t.s)}: ${t.n}"><span>${esc(t.s)}</span><span class="balk-spoor"><span class="balk-vul" style="display:block;width:${(t.n / max * 100).toFixed(1)}%"></span></span><span class="num">${t.n}</span></div>`).join('')}</div>
+      </section>
+      <section class="blok"><h2>Bezetting van de opslag</h2>
+        <div class="meter" role="img" aria-label="${nl(bezet)} m² bezet en ${nl(gereserveerd)} m² gereserveerd van ${cap} m²" title="${nl(bezet)} m² bezet, ${nl(gereserveerd)} m² gereserveerd, ${cap} m² totaal">
+          <span class="meter-bezet" style="width:${b.toFixed(1)}%"></span><span class="meter-gereserveerd" style="width:${r.toFixed(1)}%"></span></div>
+        <div class="legenda"><span><i style="background:var(--chart)"></i>In opslag: ${nl(bezet)} m²</span><span><i style="background:var(--chart-2)"></i>Aangevraagd of ingepland: ${nl(gereserveerd)} m²</span><span>Vrij: ${nl(Math.max(0, cap - bezet - gereserveerd))} m²</span></div>
+        <p class="notitie">Een opslagvloer van ${cap} m² is een aanname. Pas het aan bovenin de code bij CONFIG.</p>
+      </section>
+    </div>
+    <section class="pagina" style="gap:10px"><h2>Per project</h2>
+      <div class="tabel-wrap"><table><thead><tr><th>Project</th><th>Nummer</th><th class="num">Aanvragen</th><th class="num">Open</th><th class="num">In opslag (m²)</th></tr></thead>
+      <tbody>${perProject.map(x => `<tr><td>${esc(x.p.naam)}</td><td class="nowrap">${esc(x.p.nummer)}</td><td class="num">${x.totaal}</td><td class="num">${x.open}</td><td class="num">${nl(x.pp)}</td></tr>`).join('')}</tbody></table></div>
+    </section>
+  </div>`;
+}
+
+/* ---------- Beheerder: projecten, klanten, gebruikers ---------- */
+function vProjecten() {
+  const bewerk = UI.p.bewerk; const p = bewerk === 'nieuw' ? { id: '', nummer: '', naam: '', adres: '', toegang: '', contactNaam: '', contactTel: '', klanten: [] } : proj(bewerk);
+  const form = p ? `<form class="formulier blok" id="projectform" novalidate data-id="${esc(p.id)}">
+      <h2>${p.id ? 'Project bewerken' : 'Nieuw project'}</h2>
+      <p class="notitie">In de echte versie komen projecten uit 4PS (demo). Hier past u ze aan om te kunnen testen.</p>
+      <div class="rij-velden">${veld('naam', 'Projectnaam', true, tekst('naam', p.naam))}${veld('nummer', 'Projectnummer', true, tekst('nummer', p.nummer))}</div>
+      ${veld('adres', 'Adres bouwplaats', true, tekst('adres', p.adres))}
+      ${veld('toegang', 'Toegankelijkheid bouwplaats', false, `<textarea id="f-toegang" name="toegang" rows="3">${esc(p.toegang)}</textarea>`, { hint: 'Wordt automatisch ingevuld in elke transportaanvraag voor dit project.' })}
+      <div class="rij-velden">${veld('contactNaam', 'Standaard contactpersoon op locatie', false, tekst('contactNaam', p.contactNaam))}${veld('contactTel', 'Telefoonnummer', false, `<input type="tel" id="f-contactTel" name="contactTel" value="${esc(p.contactTel)}">`)}</div>
+      <fieldset class="veld"><legend class="veld-label">Klanten met toegang</legend><div class="vinklijst">${S.klanten.map(k => `<label class="vink"><input type="checkbox" name="klanten" value="${k.id}"${(p.klanten || []).includes(k.id) ? ' checked' : ''}> ${esc(k.naam)}</label>`).join('')}</div></fieldset>
+      <div class="knoppen"><button type="submit" class="knop primair">Opslaan</button><button type="button" class="knop" data-act="bewerk-sluit">Annuleren</button></div>
+    </form>` : '';
+  return `<div class="pagina">
+    <section class="intro"><p class="eyebrow">Beheer</p><h1 tabindex="-1">Projecten</h1><p class="sub">Een klant ziet alleen de projecten waaraan hij gekoppeld is.</p></section>
+    <div class="knoppen"><button type="button" class="knop primair" data-act="bewerk" data-id="nieuw">Nieuw project</button></div>
+    ${form}
+    <div class="tabel-wrap"><table><thead><tr><th>Project</th><th>Nummer</th><th>Adres</th><th>Klanten</th><th></th></tr></thead><tbody>
+      ${S.projecten.map(x => `<tr><td><strong>${esc(x.naam)}</strong></td><td class="nowrap">${esc(x.nummer)}</td><td>${esc(x.adres)}</td><td><div class="chips">${(x.klanten || []).map(id => `<span class="chip">${esc(klant(id) ? klant(id).naam : id)}</span>`).join('')}</div></td><td><button type="button" class="knop klein" data-act="bewerk" data-id="${x.id}">Bewerken</button></td></tr>`).join('')}
+    </tbody></table></div>
+  </div>`;
+}
+function vKlanten() {
+  const bewerk = UI.p.bewerk; const k = bewerk === 'nieuw' ? { id: '', naam: '', soort: 'Onderaannemer' } : klant(bewerk);
+  const form = k ? `<form class="formulier blok" id="klantform" novalidate data-id="${esc(k.id)}">
+      <h2>${k.id ? 'Klant bewerken' : 'Nieuwe klant'}</h2>
+      <div class="rij-velden">${veld('naam', 'Bedrijfsnaam', true, tekst('naam', k.naam))}${veld('soort', 'Soort klant', true, keuzelijst('soort', CONFIG.klantSoorten, k.soort))}</div>
+      <fieldset class="veld"><legend class="veld-label">Projecten</legend><div class="vinklijst">${S.projecten.map(p => `<label class="vink"><input type="checkbox" name="projecten" value="${p.id}"${k.id && (p.klanten || []).includes(k.id) ? ' checked' : ''}> ${esc(p.naam)}</label>`).join('')}</div></fieldset>
+      <div class="knoppen"><button type="submit" class="knop primair">Opslaan</button><button type="button" class="knop" data-act="bewerk-sluit">Annuleren</button></div>
+    </form>` : '';
+  return `<div class="pagina">
+    <section class="intro"><p class="eyebrow">Beheer</p><h1 tabindex="-1">Klanten</h1><p class="sub">Bedrijven die aanvragen mogen doen, met de projecten waar ze aan werken.</p></section>
+    <div class="knoppen"><button type="button" class="knop primair" data-act="bewerk" data-id="nieuw">Nieuwe klant</button></div>
+    ${form}
+    <div class="tabel-wrap"><table><thead><tr><th>Klant</th><th>Soort</th><th>Projecten</th><th class="num">Gebruikers</th><th class="num">Aanvragen</th><th></th></tr></thead><tbody>
+      ${S.klanten.map(x => `<tr><td><strong>${esc(x.naam)}</strong></td><td>${esc(x.soort)}</td><td><div class="chips">${projectenVanKlant(x.id).map(p => `<span class="chip">${esc(p.naam)}</span>`).join('') || '<span class="notitie">Geen</span>'}</div></td><td class="num">${S.gebruikers.filter(g => g.klantId === x.id).length}</td><td class="num">${S.aanvragen.filter(a => a.klantId === x.id).length}</td><td><button type="button" class="knop klein" data-act="bewerk" data-id="${x.id}">Bewerken</button></td></tr>`).join('')}
+    </tbody></table></div>
+  </div>`;
+}
+const ROLNAAM = { klant: 'Klant', medewerker: 'Bouwhub medewerker', beheerder: 'Beheerder' };
+function vGebruikers() {
+  const bewerk = UI.p.bewerk; const g = bewerk === 'nieuw' ? { id: '', naam: '', mail: '', tel: '', rol: 'klant', klantId: S.klanten[0] ? S.klanten[0].id : '', actief: true } : gebr(bewerk);
+  const form = g ? `<form class="formulier blok" id="gebruikerform" novalidate data-id="${esc(g.id)}">
+      <h2>${g.id ? 'Gebruiker bewerken' : 'Nieuwe gebruiker'}</h2>
+      <p class="notitie">Er is geen echte inlog in dit prototype. Later loopt inloggen via een account dat de beheerder aanmaakt.</p>
+      <div class="rij-velden">${veld('naam', 'Naam', true, tekst('naam', g.naam))}${veld('mail', 'Mailadres', true, `<input type="email" id="f-mail" name="mail" value="${esc(g.mail)}">`)}</div>
+      <div class="rij-velden">${veld('tel', 'Telefoonnummer', false, `<input type="tel" id="f-tel" name="tel" value="${esc(g.tel)}">`)}${veld('rol', 'Rol', true, keuzelijst('rol', Object.keys(ROLNAAM).map(r => ({ v: r, t: ROLNAAM[r] })), g.rol))}</div>
+      ${veld('klantId', 'Klant', true, keuzelijst('klantId', S.klanten.map(k => ({ v: k.id, t: k.naam })), g.klantId, 'Kies een klant'), { als: 'rol=klant' })}
+      <label class="vink"><input type="checkbox" name="actief" id="f-actief"${g.actief !== false ? ' checked' : ''}> Actief</label>
+      <div class="knoppen"><button type="submit" class="knop primair">Opslaan</button><button type="button" class="knop" data-act="bewerk-sluit">Annuleren</button></div>
+    </form>` : '';
+  return `<div class="pagina">
+    <section class="intro"><p class="eyebrow">Beheer</p><h1 tabindex="-1">Gebruikers</h1><p class="sub">Actieve klantgebruikers verschijnen in de keuze "Ingelogd als" bovenin.</p></section>
+    <div class="knoppen"><button type="button" class="knop primair" data-act="bewerk" data-id="nieuw">Nieuwe gebruiker</button></div>
+    ${form}
+    <div class="tabel-wrap"><table><thead><tr><th>Naam</th><th>Mail</th><th>Rol</th><th>Klant</th><th>Status</th><th></th></tr></thead><tbody>
+      ${S.gebruikers.map(x => `<tr><td><strong>${esc(x.naam)}</strong></td><td>${esc(x.mail)}</td><td>${esc(ROLNAAM[x.rol])}</td><td>${esc(x.klantId && klant(x.klantId) ? klant(x.klantId).naam : '')}</td><td>${x.actief !== false ? 'Actief' : 'Uitgeschakeld'}</td><td><button type="button" class="knop klein" data-act="bewerk" data-id="${x.id}">Bewerken</button></td></tr>`).join('')}
+    </tbody></table></div>
+  </div>`;
+}
+
+/* ---------- Over dit prototype ---------- */
+function vInfo() {
+  return `<div class="pagina">
+    <section class="intro"><p class="eyebrow">Toelichting</p><h1 tabindex="-1">Over dit prototype</h1><p class="sub">Dit prototype laat zien hoe aanvragen straks werken. Het is bedoeld om te testen welke velden en stappen ontbreken.</p></section>
+    <section class="blok"><h2>Wat is nagebootst</h2><ul class="info-lijst">
+      <li>De inlog. Bovenin kiest u een rol en een klant.</li>
+      <li>De koppelingen met 4PS en Business Central, SharePoint, Outlook, Teams en Power Automate. Ze schrijven alleen regels in het logboek onder Achter de schermen.</li>
+      <li>De pakbon. Alleen de bestandsnaam wordt bewaard, het bestand zelf niet.</li>
+      <li>Power BI. De kerncijfers worden berekend uit de nepdata.</li>
+      <li>Alle namen, adressen, telefoonnummers en mailadressen zijn verzonnen.</li>
+    </ul></section>
+    <section class="blok"><h2>Wat is anders dan het huidige vrachtformulier</h2><ul class="info-lijst">
+      <li>Toegevoegd zoals gevraagd: project (verplicht), tijdvak, contactpersoon op locatie met telefoonnummer, pakbon en toegankelijkheid van de bouwplaats.</li>
+      <li>Lading staat in regels, zodat één levering meerdere soorten lading kan hebben. Bij Anders vult de klant in wat het is.</li>
+      <li>Hoeveelheid is een aantal met een eenheid. M1 staat er nu bij als strekkende meter, en stuks is toegevoegd naast M1, M2 en M3.</li>
+      <li>De vraag naar een hijskraan verschijnt alleen als er gehesen moet worden. Gewicht is dan verplicht.</li>
+      <li>Kooiaap, hijsen en toegankelijkheid worden niet gevraagd als er op de hub gelost wordt.</li>
+      <li>Laadadres en losadres zijn keuzes: hub, bouwplaats van het project of een ander adres.</li>
+      <li>Tijdelijke opslag is een eigen aanvraag met soort goederen, benodigde vloeroppervlakte in m², inslagdatum, opslagduur, afroep en een vraag over gevaarlijke stoffen.</li>
+      <li>Voertuig is een voorkeur. De Bouwhub kiest het voertuig bij het inplannen.</li>
+      <li>Contactgegevens en facturatie komen uit het account van de klant en worden niet opnieuw gevraagd.</li>
+    </ul></section>
+    <section class="blok"><h2>Aannames</h2><ul class="info-lijst">
+      <li>Tijdvakken van twee uur tussen 07:00 en 17:00.</li>
+      <li>De klant kan zelf wijzigen en annuleren tot de aanvraag is ingepland. Na een wijziging van een bevestigde aanvraag bevestigt de Bouwhub opnieuw.</li>
+      <li>Opslag wordt gerekend in m². De hub heeft ${CONFIG.opslagCapaciteitM2} m² opslagvloer (aanname).</li>
+      <li>Er worden 8 tot 25 gebruikers verwacht, allemaal klanten. Bouwhub medewerkers en beheerders komen daar nog bij.</li>
+      <li>Statussen transport: Aangevraagd, Bevestigd, Ingepland, Onderweg, Geleverd. Statussen opslag: Aangevraagd, Bevestigd, Ingepland, In opslag, Afgerond. Daarnaast Afgewezen en Geannuleerd.</li>
+      <li>Al deze waarden staan bovenin de code onder CONFIG en zijn daar aan te passen.</li>
+    </ul></section>
+  </div>`;
+}
+function vNietGevonden() { return `<div class="pagina"><h1 tabindex="-1">Aanvraag niet gevonden</h1><p class="sub">Misschien is de demo teruggezet.</p><div><button type="button" class="knop" data-act="terug">Terug</button></div></div>`; }
+
+/* ---------- Achter de schermen paneel ---------- */
+function renderAchter() {
+  const el = document.getElementById('achter');
+  const mods = ['vierPS', 'sharepoint', 'outlook', 'teams', 'powerAutomate'].map(k => Koppelingen[k]);
+  el.innerHTML = `<div class="achter-kop"><div><h2>Achter de schermen</h2><span class="demo-tag">Demo</span></div><button type="button" class="knop klein" data-act="achter-sluit">Sluiten</button></div>
+    <div class="achter-inhoud">
+      <p class="notitie">Hier ziet u wat de koppelingen zouden doen. Niets wordt echt verstuurd. Elk onderdeel kan later los vervangen worden door een echte koppeling.</p>
+      <section class="stapel"><h3>Onderdelen</h3>${mods.map(m => `<div class="module"><strong>${esc(m.naam)} <span class="demo-tag">Demo</span></strong><p>${esc(m.richting)}</p></div>`).join('')}</section>
+      <section class="stapel"><h3>Logboek</h3>${logLijst(S.log.slice(0, 60))}</section>
+    </div>`;
+}
+
+/* ---------- Kop en navigatie ---------- */
+const NAV = {
+  klant: [['k-dashboard', 'Mijn aanvragen'], ['nieuw-transport', 'Transport aanvragen'], ['nieuw-opslag', 'Opslag aanvragen']],
+  medewerker: [['m-inbox', 'Binnengekomen'], ['m-planning', 'Planning']],
+  beheerder: [['b-cijfers', 'Kerncijfers'], ['b-projecten', 'Projecten'], ['b-klanten', 'Klanten'], ['b-gebruikers', 'Gebruikers']]
+};
+const STANDAARD = { klant: 'k-dashboard', medewerker: 'm-inbox', beheerder: 'b-cijfers' };
+function renderKop() {
+  document.getElementById('rol').value = UI.rol;
+  const als = document.getElementById('als'); const wrap = document.getElementById('als-wrap');
+  wrap.hidden = UI.rol !== 'klant';
+  const g = huidigeGebruiker();
+  als.innerHTML = klantGebruikers().map(x => `<option value="${x.id}"${x.id === (g && g.id) ? ' selected' : ''}>${esc(x.naam)}, ${esc(klant(x.klantId) ? klant(x.klantId).naam : '')}</option>`).join('');
+  const actief = UI.view === 'k-form' && !UI.p.id && !UI.p.afroep && !UI.p.naarHub ? 'nieuw-' + UI.p.type : UI.view;
+  document.getElementById('nav').innerHTML = NAV[UI.rol].map(([v, t]) => `<button type="button" data-act="nav" data-view="${v}"${actief === v ? ' aria-current="page"' : ''}>${t}</button>`).join('');
+  const nieuw = Math.max(0, S.log.length - UI.logGezien);
+  const teller = document.getElementById('log-teller'); teller.textContent = nieuw; teller.hidden = nieuw === 0;
+}
+
+const VIEWS = { 'k-dashboard': vKlantDashboard, 'k-form': vFormulier, 'k-detail': vDetail, 'k-klaar': vKlaar, 'm-inbox': vInbox, 'm-detail': vDetail, 'm-planning': vPlanning, 'b-cijfers': vCijfers, 'b-projecten': vProjecten, 'b-klanten': vKlanten, 'b-gebruikers': vGebruikers, 'info': vInfo };
+const PREFIX = { klant: 'k-', medewerker: 'm-', beheerder: 'b-' };
+function render() {
+  if (!VIEWS[UI.view] || (UI.view !== 'info' && !UI.view.startsWith(PREFIX[UI.rol]))) { UI.view = STANDAARD[UI.rol]; UI.p = {}; }
+  if (UI.rol === 'klant' && !huidigeGebruiker()) { UI.rol = 'beheerder'; UI.view = 'b-gebruikers'; }
+  renderKop();
+  const m = document.getElementById('main');
+  m.innerHTML = VIEWS[UI.view]();
+  m.querySelectorAll('form').forEach(pasZichtbaarheidToe);
+  if (UI.view === 'm-inbox') renderInboxLijst();
+  if (UI.achterOpen) renderAchter();
+}
+function ga(view, p) {
+  if (view === 'nieuw-transport') { view = 'k-form'; p = { type: 'transport' }; }
+  if (view === 'nieuw-opslag') { view = 'k-form'; p = { type: 'opslag' }; }
+  UI.vorige = { view: UI.view, p: UI.p };
+  UI.view = view; UI.p = p || {};
+  render();
+  window.scrollTo(0, 0);
+  const h = document.querySelector('#main h1'); if (h) h.focus({ preventScroll: true });
+}
+function terug() {
+  const v = UI.vorige;
+  if (v && v.view && v.view !== UI.view && !['k-form', 'k-klaar'].includes(v.view) && VIEWS[v.view] && (v.view === 'info' || v.view.startsWith(PREFIX[UI.rol]))) ga(v.view, Object.assign({}, v.p, { annuleer: false, afwijs: false, inplan: false }));
+  else ga(STANDAARD[UI.rol], {});
+}
+
+function toast(titel, sub) {
+  const box = document.getElementById('toasts'); box.innerHTML = '';
+  const t = document.createElement('div'); t.className = 'toast';
+  t.innerHTML = `<strong>${esc(titel)}</strong>${sub ? `<small>${esc(sub)}</small>` : ''}`;
+  box.appendChild(t);
+  setTimeout(() => t.remove(), 4500);
+}
+
+function openAchter(open) {
+  UI.achterOpen = open;
+  document.getElementById('achter').hidden = !open; document.getElementById('scherm').hidden = !open;
+  if (open) { UI.logGezien = S.log.length; renderAchter(); renderKop(); document.querySelector('#achter button').focus(); }
+}
+
+/* =====================================================================
+   GEBEURTENISSEN
+   ===================================================================== */
+document.addEventListener('click', e => {
+  const t = e.target.closest('[data-act]'); if (!t) return;
+  const act = t.dataset.act; const id = t.dataset.id;
+  switch (act) {
+    case 'nav': ga(t.dataset.view, {}); break;
+    case 'home': ga(STANDAARD[UI.rol], {}); break;
+    case 'nieuw': ga('k-form', { type: t.dataset.type }); break;
+    case 'open': if (UI.achterOpen) openAchter(false); ga(UI.rol === 'medewerker' ? 'm-detail' : 'k-detail', { id }); break;
+    case 'terug': terug(); break;
+    case 'tab': UI.p.tab = t.dataset.tab; render(); break;
+    case 'wijzig': ga('k-form', { type: aanv(id).type, id }); break;
+    case 'annuleer-open': UI.p.annuleer = true; render(); document.getElementById('f-reden').focus(); break;
+    case 'annuleer-sluit': UI.p.annuleer = false; render(); break;
+    case 'afroep': ga('k-form', { type: 'transport', afroep: id }); break;
+    case 'naar-hub': ga('k-form', { type: 'transport', naarHub: id }); break;
+    case 'afwijs-open': UI.p.afwijs = true; render(); document.getElementById('f-reden').focus(); break;
+    case 'inplan-open': UI.p.inplan = true; render(); document.getElementById('f-datum').focus(); break;
+    case 'sluit-form': UI.p.afwijs = false; UI.p.inplan = false; render(); break;
+    case 'status': { const a = zetStatus(id, t.dataset.naar); toast(`${a.id} staat nu op ${a.status}`, 'Demo: status naar Business Central, mail naar de klant'); render(); break; }
+    case 'snelfilter': UI.f.status = UI.f.status === t.dataset.status ? 'open' : t.dataset.status; render(); break;
+    case 'regel-plus': {
+      const box = document.getElementById('regels'); const i = Math.max(-1, ...[...box.querySelectorAll('.regel')].map(r => Number(r.dataset.i))) + 1;
+      box.insertAdjacentHTML('beforeend', regelHTML(null, i)); pasZichtbaarheidToe(box.closest('form')); document.getElementById('r-soort-' + i).focus(); break;
+    }
+    case 'regel-min': {
+      const box = document.getElementById('regels');
+      if (box.querySelectorAll('.regel').length > 1) t.closest('.regel').remove();
+      else { const r = t.closest('.regel'); r.querySelectorAll('input').forEach(x => x.value = ''); r.querySelector('.r-soort').value = ''; pasZichtbaarheidToe(box.closest('form')); }
+      break;
+    }
+    case 'achter': openAchter(!UI.achterOpen); break;
+    case 'achter-sluit': openAchter(false); break;
+    case 'reset-vraag': document.getElementById('reset-balk').hidden = false; document.querySelector('[data-act="reset-nee"]').focus(); window.scrollTo(0, 0); break;
+    case 'reset-nee': document.getElementById('reset-balk').hidden = true; break;
+    case 'reset-ja':
+      browserOpslag.wis(CONFIG.sleutel + ':data'); S = beginsituatie(); bewaar(); UI.logGezien = 0; UI.f = { status: 'open', type: 'alle', project: 'alle', zoek: '' };
+      document.getElementById('reset-balk').hidden = true; ga(STANDAARD[UI.rol], {}); toast('Demo teruggezet naar de beginsituatie'); break;
+    case 'bewerk': UI.p.bewerk = id; render(); { const f = document.querySelector('#main form'); if (f) { f.scrollIntoView({ block: 'start' }); const i = f.querySelector('input'); if (i) i.focus({ preventScroll: true }); } } break;
+    case 'bewerk-sluit': UI.p.bewerk = null; render(); break;
+  }
+});
+
+document.addEventListener('change', e => {
+  const t = e.target;
+  if (t.id === 'rol') { UI.rol = t.value; bewaarUI(); ga(STANDAARD[UI.rol], {}); return; }
+  if (t.id === 'als') { UI.als = t.value; bewaarUI(); ga('k-dashboard', {}); return; }
+  if (t.dataset.filter && t.dataset.filter !== 'zoek') { UI.f[t.dataset.filter] = t.value; render(); return; }
+  const f = t.form; if (!f) return;
+  if (t.name === 'projectId' && f.id === 'aanvraagform') projectGekozen(f);
+  pasZichtbaarheidToe(f);
+});
+document.addEventListener('input', e => {
+  const t = e.target;
+  if (t.dataset.filter === 'zoek') { UI.f.zoek = t.value; renderInboxLijst(); return; }
+  if (t.dataset && t.dataset.auto) delete t.dataset.auto;
+  const wrap = t.closest('.heeft-fout'); if (wrap) { wrap.classList.remove('heeft-fout'); const p = wrap.querySelector('.fout'); if (p) p.hidden = true; t.removeAttribute('aria-invalid'); }
+  if (t.closest('.regel')) { const p = t.closest('.regel').querySelector('.regel-fout'); if (p) p.hidden = true; t.removeAttribute('aria-invalid'); }
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && UI.achterOpen) openAchter(false); });
+
+document.addEventListener('submit', e => {
+  e.preventDefault();
+  const f = e.target; const w = n => (f.elements[n] ? String(f.elements[n].value || '').trim() : '');
+  switch (f.id) {
+    case 'aanvraagform': verstuurFormulier(f); break;
+    case 'annuleerform': {
+      if (!w('reden')) { veldFout(f, 'reden', 'Vul een reden in.'); return; }
+      const a = zetStatus(UI.p.id, 'Geannuleerd', { notitie: w('reden') }); UI.p.annuleer = false;
+      toast(`${a.id} is geannuleerd`, 'Demo: Business Central, Outlook en Teams bijgewerkt'); render(); break;
+    }
+    case 'afwijsform': {
+      if (!w('reden')) { veldFout(f, 'reden', 'Vul een reden in voor de klant.'); return; }
+      const a = zetStatus(UI.p.id, 'Afgewezen', { notitie: w('reden') }); UI.p.afwijs = false;
+      toast(`${a.id} is afgewezen`, 'Demo: mail met reden naar de klant'); render(); break;
+    }
+    case 'inplanform': {
+      if (!w('datum')) { veldFout(f, 'datum', 'Kies een datum.'); return; }
+      const a = aanv(UI.p.id);
+      const gepland = { datum: w('datum'), tijdvak: w('tijdvak') }; if (a.type === 'transport') gepland.voertuig = w('voertuig');
+      zetStatus(a.id, 'Ingepland', { gepland }); UI.p.inplan = false;
+      toast(`${a.id} is ingepland op ${fmtDag(gepland.datum)}`, 'Demo: planning naar Business Central, mail naar de klant'); render(); break;
+    }
+    case 'projectform': {
+      const fouten = {}; if (!w('naam')) fouten.naam = 'Vul een projectnaam in.'; if (!w('nummer')) fouten.nummer = 'Vul een projectnummer in.'; if (!w('adres')) fouten.adres = 'Vul het adres van de bouwplaats in.';
+      if (!toonEenvoudig(f, fouten)) return;
+      let p = proj(f.dataset.id);
+      if (!p) { p = { id: 'P' + (Math.max(0, ...S.projecten.map(x => Number(x.id.slice(1)))) + 1) }; S.projecten.push(p); }
+      Object.assign(p, { naam: w('naam'), nummer: w('nummer'), adres: w('adres'), toegang: w('toegang'), contactNaam: w('contactNaam'), contactTel: w('contactTel'), klanten: [...f.querySelectorAll('input[name="klanten"]:checked')].map(x => x.value) });
+      Koppelingen.vierPS.projectGegevens(p); bewaar(); UI.p.bewerk = null; toast(`Project ${p.naam} opgeslagen`); render(); break;
+    }
+    case 'klantform': {
+      const fouten = {}; if (!w('naam')) fouten.naam = 'Vul een bedrijfsnaam in.';
+      if (!toonEenvoudig(f, fouten)) return;
+      let k = klant(f.dataset.id);
+      if (!k) { k = { id: 'K' + (Math.max(0, ...S.klanten.map(x => Number(x.id.slice(1)))) + 1) }; S.klanten.push(k); }
+      Object.assign(k, { naam: w('naam'), soort: w('soort') });
+      const gekozen = [...f.querySelectorAll('input[name="projecten"]:checked')].map(x => x.value);
+      S.projecten.forEach(p => { p.klanten = (p.klanten || []).filter(id => id !== k.id); if (gekozen.includes(p.id)) p.klanten.push(k.id); });
+      bewaar(); UI.p.bewerk = null; toast(`Klant ${k.naam} opgeslagen`); render(); break;
+    }
+    case 'gebruikerform': {
+      const fouten = {}; if (!w('naam')) fouten.naam = 'Vul een naam in.';
+      if (!w('mail')) fouten.mail = 'Vul een mailadres in.'; else if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(w('mail'))) fouten.mail = 'Vul een geldig mailadres in, zoals naam@bedrijf.nl.';
+      if (w('rol') === 'klant' && !w('klantId')) fouten.klantId = 'Kies bij welke klant deze gebruiker hoort.';
+      if (!toonEenvoudig(f, fouten)) return;
+      let g = gebr(f.dataset.id);
+      if (!g) { g = { id: 'U' + (Math.max(0, ...S.gebruikers.map(x => Number(x.id.slice(1)))) + 1) }; S.gebruikers.push(g); }
+      Object.assign(g, { naam: w('naam'), mail: w('mail'), tel: w('tel'), rol: w('rol'), klantId: w('rol') === 'klant' ? w('klantId') : '', actief: f.elements.actief.checked });
+      bewaar(); UI.p.bewerk = null; toast(`Gebruiker ${g.naam} opgeslagen`); render(); break;
+    }
+  }
+});
+function veldFout(f, naam, msg) { toonEenvoudig(f, { [naam]: msg }); }
+function toonEenvoudig(f, fouten) {
+  f.querySelectorAll('.heeft-fout').forEach(el => el.classList.remove('heeft-fout'));
+  f.querySelectorAll('.fout').forEach(el => { el.hidden = true; });
+  f.querySelectorAll('[aria-invalid]').forEach(el => el.removeAttribute('aria-invalid'));
+  let eerste = null;
+  Object.entries(fouten).forEach(([naam, msg]) => {
+    const wrap = f.querySelector(`[data-veld="${naam}"]`); const p = f.querySelector(`#fout-${naam}`); const c = f.querySelector(`#f-${naam}`);
+    if (wrap) wrap.classList.add('heeft-fout'); if (p) { p.textContent = msg; p.hidden = false; }
+    if (c) { c.setAttribute('aria-invalid', 'true'); if (!eerste) eerste = c; }
+  });
+  if (eerste) eerste.focus();
+  return !Object.keys(fouten).length;
+}
+
+/* Start */
+UI.logGezien = S.log.length;
+render();
+</script>
+
+</body>
+</html>
